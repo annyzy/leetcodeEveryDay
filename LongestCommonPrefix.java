@@ -15,6 +15,7 @@ public class LongestCommonPrefix{
               System.out.print("Now the prefix is : ");System.out.println(prefix);
               if(prefix.isEmpty())
               {
+                  System.out.println("Prefix is empty now");
                   return "";
               }
             }
