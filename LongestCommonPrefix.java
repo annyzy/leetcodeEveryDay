@@ -1,5 +1,5 @@
 import java.util.Arrays;
-public class Main {
+public class LongestCommonPrefix{
     static String longestCommonPrefix(String[] strs) 
     {
         //edge case: array empty
