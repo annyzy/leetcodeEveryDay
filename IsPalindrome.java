@@ -1,4 +1,4 @@
-public class Main {
+public class IsPalindrome {
     static boolean isPalindrome(String s) {
         //StringBuilder creates a resizable array
         StringBuilder y = new StringBuilder();
