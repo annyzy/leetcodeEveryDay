@@ -1,4 +1,4 @@
-public class M2L{
+public class MergeTwoLists{
     
     class ListNode{
       int val;
@@ -9,24 +9,12 @@ public class M2L{
         this.val = val;
         this.next = null;
       }
-      public ListNode(int val, ListNode next){
-        this.val = val;
-        this.next = next;
-      }
     }
 
     public ListNode head = null;
     public ListNode end = null;
 
-    public void appendToTail(int val){
-      //ListNode end = new ListNode(val);
-
-      // ListNode n = this;
-
-      // while(n.next != null){ 
-      //   n = n.next;
-      // }
-      // n.next = end;  
+    public void appendToTail(int val){ 
       ListNode temp = new ListNode(val);
 
       if(head == null){
@@ -40,14 +28,6 @@ public class M2L{
     }
 
     public void display(){
-      // ListNode end = new ListNode(val);
-
-      // ListNode n = this;
-      // while(n.next != null){
-      //   System.out.print(n.val + " ");   
-      //   n = n.next;
-      // } 
-      //Need a node point to head  
       ListNode current = head;
       if(head == null){
           System.out.println("List is empty");    
@@ -65,44 +45,40 @@ public class M2L{
         if(l1 == null) return l2;
         if(l2 == null) return l1; 
 
-        ListNode current = head;
         if(l1.val >= l2.val){
-           System.out.println(l1.val); 
-           System.out.println(l2.val); 
-           System.out.println("Now l1.val >= l2.val: ");    
-           current = l2; 
-           System.out.println(current.val);               
-           current.next = mergeTwoLists(l1, l2.next);
+          System.out.println("Now l1.val >= l2.val: ");  
+          System.out.println("l1's val is: " + l1.val); 
+          System.out.println("l2's val is: " +l2.val);               
+          l2.next = mergeTwoLists(l1, l2.next);
 
-           return current;
-
+          return l2;
         } else{
-            System.out.println("Now l1.val < l2.val: ");  
-            current = l1;                 
-            current.next= mergeTwoLists(l1.next, l2);
-            return current;
+          System.out.println("Now l1.val < l2.val: "); 
+          System.out.println("l1's val is: " +l1.val); 
+          System.out.println("l2's val is: " +l2.val);                     
+            l1.next= mergeTwoLists(l1.next, l2);
+            return l1;
         }
     }
 
     public static void main(String[] args){
-      M2L l1 = new M2L();
+      MergeTwoLists l1 = new MergeTwoLists();
       l1.appendToTail(1);
       l1.appendToTail(2);
       System.out.print("The first list l1 is: ");
       l1.display();
 
 
-      M2L l2 = new M2L();
+      MergeTwoLists l2 = new MergeTwoLists();
       l2.appendToTail(1);
       l2.appendToTail(3);
       System.out.print("The second list l2 is: ");
       l2.display();
-      
-      // ListNode l = new ListNode();
-      M2L l = new M2L();
-      l = mergeTwoLists(l1,l2);
+     
+      MergeTwoLists l3 = new MergeTwoLists();
+      //return a node(ListNode), not MergeTwoLists
+      l3.head = l3.mergeTwoLists(l1.head,l2.head);
       System.out.print("Merge l1 and l2 gets l3 is: ");
-      l.display();
+      l3.display();
     }
 }
-
