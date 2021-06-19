@@ -48,21 +48,21 @@ public class SingleLinkedList{
         if(l1.val >= l2.val){
 			System.out.println("Now l1.val >= l2.val: ");
 			System.out.println("l1's val is: " + l1.val);
-			System.out.println("l2's val is: " +l2.val);
+			System.out.println("l2's val is: " + l2.val);
 			l2.next = mergeTwoLists(l1, l2.next);
 
 			return l2;
         } else{
 			System.out.println("Now l1.val < l2.val: ");
-			System.out.println("l1's val is: " +l1.val);
-			System.out.println("l2's val is: " +l2.val);
+			System.out.println("l1's val is: " + l1.val);
+			System.out.println("l2's val is: " + l2.val);
 			l1.next= mergeTwoLists(l1.next, l2);
 			return l1;
         }
     }
     
-	public ListNode deleteDuplicates(ListNode head) {
-		ListNode current = head;
+    public ListNode deleteDuplicates(ListNode head) {
+    	ListNode current = head;
         while (current != null && current.next != null){
             if(current.next.val == current.val){
                 current.next = current.next.next;
