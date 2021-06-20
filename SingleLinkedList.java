@@ -1,3 +1,4 @@
+import java.util.*;
 public class SingleLinkedList{
     
     class ListNode{
@@ -48,21 +49,21 @@ public class SingleLinkedList{
         if(l1.val >= l2.val){
 			System.out.println("Now l1.val >= l2.val: ");
 			System.out.println("l1's val is: " + l1.val);
-			System.out.println("l2's val is: " + l2.val);
+			System.out.println("l2's val is: " +l2.val);
 			l2.next = mergeTwoLists(l1, l2.next);
 
 			return l2;
         } else{
 			System.out.println("Now l1.val < l2.val: ");
-			System.out.println("l1's val is: " + l1.val);
-			System.out.println("l2's val is: " + l2.val);
+			System.out.println("l1's val is: " +l1.val);
+			System.out.println("l2's val is: " +l2.val);
 			l1.next= mergeTwoLists(l1.next, l2);
 			return l1;
         }
     }
     
-    public ListNode deleteDuplicates(ListNode head) {
-    	ListNode current = head;
+	public ListNode deleteDuplicates(ListNode head) {
+		ListNode current = head;
         while (current != null && current.next != null){
             if(current.next.val == current.val){
                 current.next = current.next.next;
@@ -71,6 +72,22 @@ public class SingleLinkedList{
             }
         }
         return head;
+    }
+    
+	public boolean hasCycle(ListNode head) {
+        HashSet<ListNode> seenNodes = new HashSet<>();
+        
+        if( head == null ) return false;
+        
+        while(head != null ){
+            if(seenNodes.contains(head)){
+				System.out.println("There is a cycle traverse to node value " + head.val);
+                return true;
+            }
+            seenNodes.add(head);
+            head = head.next;
+        }
+        return false;
     }
 
     public static void main(String[] args){
@@ -97,9 +114,25 @@ public class SingleLinkedList{
 		l3.display();
 		
 		System.out.println();
-		System.out.println("Remove duplicate nodes in l3:");
+		System.out.println("Remove duplicate nodes in l3 :");
 		l3.head = l3.deleteDuplicates(l3.head);
 		System.out.print("The new list l3 : ");
 		l3.display();
-    }
+		
+		System.out.println();
+		System.out.println("Test whether there is a cycle in l4 : ");
+		SingleLinkedList l4 = new SingleLinkedList();
+		l4.appendToTail(1);
+		l4.appendToTail(2);
+		l4.appendToTail(5);
+		System.out.print("The fourth list l4 : ");
+		l4.display();
+		l4.head.next.next = l4.head.next;
+		if (l4.hasCycle(l4.head)){
+			System.out.println("Cycle found in l4");
+		} else{
+			System.out.println("No cycle found in l4");
+		}
+		
+		}
 }
