@@ -95,6 +95,31 @@ public class SingleLinkedList {
 		return false;
 	}
 
+	public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+		HashSet<ListNode> set = new HashSet<ListNode>();
+
+		if (headA == null)
+			return null;
+		if (headB == null)
+			return null;
+
+		while (headA != null) {
+			set.add(headA);
+			headA = headA.next;
+		}
+
+		while (headB != null) {
+			if (set.contains(headB)) {
+				System.out.println("The intersection node is : " + headB.val);
+				return headB;
+			}
+			headB = headB.next;
+		}
+
+		System.out.println("There is no intersction node");
+		return null;
+	}
+
 	public static void main(String[] args) {
 		SingleLinkedList l1 = new SingleLinkedList();
 		l1.appendToTail(1);
@@ -136,6 +161,26 @@ public class SingleLinkedList {
 		} else {
 			System.out.println("No cycle found in l4");
 		}
+
+		System.out.println();
+		System.out.println("Test whether there is a intersection node between l5 and l6 : ");
+		SingleLinkedList l5 = new SingleLinkedList();
+		l5.appendToTail(4);
+		l5.appendToTail(1);
+		l5.appendToTail(9);
+		l5.appendToTail(4);
+		l5.appendToTail(5);
+		System.out.print("The fifth list l5 : ");
+		l5.display();
+		SingleLinkedList l6 = new SingleLinkedList();
+		l6.appendToTail(5);
+		l6.appendToTail(6);
+		l6.appendToTail(4);
+		l6.appendToTail(5);
+		System.out.print("The sixth list l6 : ");
+		l6.display();
+		l6.head.next.next = l5.head.next.next.next;
+		l5.head = l5.getIntersectionNode(l5.head, l6.head);
 
 	}
 }
