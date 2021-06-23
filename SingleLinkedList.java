@@ -120,6 +120,24 @@ public class SingleLinkedList {
 		return null;
 	}
 
+	public ListNode reverseList(ListNode head) {
+		if (head == null)
+			return null;
+
+		ListNode curr = head;
+		ListNode prev = null;
+
+		while (curr != null) {
+
+			ListNode nextTemp = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = nextTemp;
+		}
+
+		return prev;
+	}
+
 	public static void main(String[] args) {
 		SingleLinkedList l1 = new SingleLinkedList();
 		l1.appendToTail(1);
@@ -182,5 +200,10 @@ public class SingleLinkedList {
 		l6.head.next.next = l5.head.next.next.next;
 		l5.head = l5.getIntersectionNode(l5.head, l6.head);
 
+		System.out.println();
+		SingleLinkedList l7 = new SingleLinkedList();
+		l7.head = l6.reverseList(l6.head);
+		System.out.print("Reverse l6 to get l7 : ");
+		l7.display();
 	}
 }
