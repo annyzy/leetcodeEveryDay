@@ -63,8 +63,7 @@ public class BinaryTree {
     public static void main(String args[]) {
         BinaryTree tree = new BinaryTree();
         TreeNode root = new TreeNode(5);
-        System.out.println("Binary Tree Example: ");
-        System.out.println("Building tree with root value " + root.val);
+        System.out.println("Creating a binary tree with root value " + root.val);
         tree.add(root, 2);
         tree.add(root, 4);
         tree.add(root, 8);
