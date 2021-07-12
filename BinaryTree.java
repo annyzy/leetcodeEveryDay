@@ -1,20 +1,21 @@
 import java.util.*;
 import java.util.Arrays;
 
-public class BinaryTree{
-    static class TreeNode{
+public class BinaryTree {
+    static class TreeNode {
         int val;
         TreeNode left, right;
 
-        TreeNode() {}
-        
+        TreeNode() {
+        }
+
         TreeNode(int val) {
             this.val = val;
             left = null;
             right = null;
         }
 
-        TreeNode(int val, TreeNode left, TreeNode right){
+        TreeNode(int val, TreeNode left, TreeNode right) {
             this.val = val;
             this.left = left;
             this.right = right;
@@ -22,44 +23,44 @@ public class BinaryTree{
     }
 
     public void add(TreeNode node, int val) {
-        if ( val < node.val){
-            if ( node.left != null){
+        if (val < node.val) {
+            if (node.left != null) {
                 add(node.left, val);
-            } else{
-                 System.out.println( " Added " + val + " to the left of " + node.val);
-                 node.left = new TreeNode(val);
-            } 
-        }
-        else if ( val > node.val ){ 
-            if ( node.right != null ){
+            } else {
+                System.out.println(" Added " + val + " to the left of " + node.val);
+                node.left = new TreeNode(val);
+            }
+        } else if (val > node.val) {
+            if (node.right != null) {
                 add(node.right, val);
-            } else{
-                System.out.println( " Added " + val + " to the right of " + node.val);
+            } else {
+                System.out.println(" Added " + val + " to the right of " + node.val);
                 node.right = new TreeNode(val);
-            }          
+            }
         }
     }
 
-    public List<Integer> inorderTraversal(TreeNode root){
-        List <Integer> res = new ArrayList <> ();
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
         helper(root, res);
         System.out.println(res.toString());
         return res;
     }
 
-    public void helper(TreeNode root, List<Integer> res){
-        if(root == null) return;
-        
-        if ( root.left != null ){
+    public void helper(TreeNode root, List<Integer> res) {
+        if (root == null)
+            return;
+
+        if (root.left != null) {
             helper(root.left, res);
         }
         res.add(root.val);
-        if ( root.right != null ){
+        if (root.right != null) {
             helper(root.right, res);
         }
     }
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
         BinaryTree tree = new BinaryTree();
         TreeNode root = new TreeNode(5);
         System.out.println("Binary Tree Example: ");
@@ -74,6 +75,4 @@ public class BinaryTree{
         System.out.print("Traversing tree in order: ");
         tree.inorderTraversal(root);
     }
-
-
 }
