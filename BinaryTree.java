@@ -42,36 +42,78 @@ public class BinaryTree {
 
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
-        helper(root, res);
+        helper1(root, res);
         System.out.println(res.toString());
         return res;
     }
 
-    public void helper(TreeNode root, List<Integer> res) {
+    public void helper1(TreeNode root, List<Integer> res) {
         if (root == null)
             return;
 
         if (root.left != null) {
-            helper(root.left, res);
+            helper1(root.left, res);
         }
         res.add(root.val);
         if (root.right != null) {
-            helper(root.right, res);
+            helper1(root.right, res);
         }
     }
 
+    static boolean isSymmetric(TreeNode root) {
+        boolean ans = helper2(root, root);
+        if (ans == true) {
+            System.out.println("It's a symmetric tree. ");
+        } else {
+            System.out.println("It's not a symmetric tree. ");
+        }
+
+        return ans;
+    }
+
+    static boolean helper2(TreeNode tree1, TreeNode tree2) {
+        if (tree1 == null && tree2 == null) {
+            return true;
+        }
+
+        if (tree1 == null || tree2 == null) {
+            return false;
+        }
+        if (tree1.val != tree2.val) {
+            return false;
+        }
+
+        return helper2(tree1.left, tree2.right) && helper2(tree1.right, tree2.left);
+    }
+
     public static void main(String args[]) {
-        BinaryTree tree = new BinaryTree();
-        TreeNode root = new TreeNode(5);
-        System.out.println("Creating a binary tree with root value " + root.val);
-        tree.add(root, 2);
-        tree.add(root, 4);
-        tree.add(root, 8);
-        tree.add(root, 6);
-        tree.add(root, 7);
-        tree.add(root, 3);
-        tree.add(root, 9);
+        BinaryTree tree1 = new BinaryTree();
+        TreeNode root1 = new TreeNode(5);
+        System.out.println("Creating a binary tree1 with root value " + root1.val);
+        tree1.add(root1, 2);
+        tree1.add(root1, 4);
+        tree1.add(root1, 8);
+        tree1.add(root1, 6);
+        tree1.add(root1, 7);
+        tree1.add(root1, 3);
+        tree1.add(root1, 9);
         System.out.print("Traversing tree in order: ");
-        tree.inorderTraversal(root);
+        tree1.inorderTraversal(root1);
+        boolean ans1 = isSymmetric(root1);
+
+        System.out.println("");
+
+        BinaryTree tree2 = new BinaryTree();
+        TreeNode root2 = new TreeNode(2);
+        System.out.println("Creating a symmetric binary tree2 with root value " + root2.val);
+        root2.left = new TreeNode(1);
+        root2.right = new TreeNode(1);
+        root2.left.right = new TreeNode(5);
+        root2.left.left = new TreeNode(9);
+        root2.right.left = new TreeNode(5);
+        root2.right.right = new TreeNode(9);
+        System.out.print("Traversing tree2 in order: ");
+        tree2.inorderTraversal(root2);
+        boolean ans2 = isSymmetric(root2);
     }
 }
