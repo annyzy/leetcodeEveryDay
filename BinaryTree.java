@@ -60,7 +60,7 @@ public class BinaryTree {
         }
     }
 
-    static boolean isSymmetric(TreeNode root) {
+    public static boolean isSymmetric(TreeNode root) {
         boolean ans = helper2(root, root);
         if (ans == true) {
             System.out.println("It's a symmetric tree. ");
@@ -71,7 +71,7 @@ public class BinaryTree {
         return ans;
     }
 
-    static boolean helper2(TreeNode tree1, TreeNode tree2) {
+    public static boolean helper2(TreeNode tree1, TreeNode tree2) {
         if (tree1 == null && tree2 == null) {
             return true;
         }
@@ -84,6 +84,17 @@ public class BinaryTree {
         }
 
         return helper2(tree1.left, tree2.right) && helper2(tree1.right, tree2.left);
+    }
+
+    public static int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        } else {
+            int leftHeight = maxDepth(root.left);
+            int rightHeight = maxDepth(root.right);
+            int max = Math.max(leftHeight, rightHeight) + 1;
+            return max;
+        }
     }
 
     public static void main(String args[]) {
@@ -100,6 +111,8 @@ public class BinaryTree {
         System.out.print("Traversing tree in order: ");
         tree1.inorderTraversal(root1);
         boolean ans1 = isSymmetric(root1);
+        int tree1Depth = maxDepth(root1);
+        System.out.println("Tree1 depth is " + tree1Depth);
 
         System.out.println("");
 
@@ -115,5 +128,7 @@ public class BinaryTree {
         System.out.print("Traversing tree2 in order: ");
         tree2.inorderTraversal(root2);
         boolean ans2 = isSymmetric(root2);
+        int tree2Depth = maxDepth(root2);
+        System.out.println("Tree2 depth is " + tree2Depth);
     }
 }
