@@ -81,17 +81,21 @@ public class SingleLinkedList {
 	public boolean hasCycle(ListNode head) {
 		HashSet<ListNode> seenNodes = new HashSet<>();
 
-		if (head == null)
+		if (head == null){
+			System.out.println("Invalid cycle linked list: no head provided.");
 			return false;
+		}
+			
 
 		while (head != null) {
 			if (seenNodes.contains(head)) {
-				System.out.println("There is a cycle traverse to node value " + head.val);
+				System.out.println("There is a cycle traverse to node value " + head.val + ", cycle found.");
 				return true;
 			}
 			seenNodes.add(head);
 			head = head.next;
 		}
+		System.out.println("No cycle found.");
 		return false;
 	}
 
@@ -138,13 +142,46 @@ public class SingleLinkedList {
 		return prev;
 	}
 
+	public boolean isPalindrome(ListNode head) {
+		if ( head ==  null ) {
+			System.out.println("Invalid palindrome list: no head provided.");
+			return false;
+		}
+
+		List<Integer> list =  new ArrayList<Integer>();
+
+		ListNode curr = head;
+		while( curr != null ){
+			list.add(curr.val);
+			curr = curr.next;
+		}
+
+		int front = 0;
+		int back = list.size() - 1;
+
+		while(front < back){
+			if( list.get(front) == list.get(back)){
+				front ++;
+				back --;
+			}else{
+				System.out.println("Not a palindrome");
+				return false;
+			}
+		}
+		System.out.println("Is a palindrome.");
+		return true;
+
+	}
+
 	public static void main(String[] args) {
 		SingleLinkedList l1 = new SingleLinkedList();
 		l1.appendToTail(1);
 		l1.appendToTail(2);
 		System.out.print("The first list l1 : ");
 		l1.display();
+		l1.isPalindrome(l1.head);
 
+		System.out.println();
 		SingleLinkedList l2 = new SingleLinkedList();
 		l2.appendToTail(1);
 		l2.appendToTail(3);
@@ -174,11 +211,7 @@ public class SingleLinkedList {
 		System.out.print("The fourth list l4 : ");
 		l4.display();
 		l4.head.next.next = l4.head.next;
-		if (l4.hasCycle(l4.head)) {
-			System.out.println("Cycle found in l4");
-		} else {
-			System.out.println("No cycle found in l4");
-		}
+		l4.hasCycle(l4.head);
 
 		System.out.println();
 		System.out.println("Test whether there is a intersection node between l5 and l6 : ");
