@@ -1,1 +1,6 @@
-
+Binary Tree
+	Height
+		the largest # of edges in a path from a leaf node to a target node 
+	Balanced Binary Tree
+		the left and right subtrees of every node differ in height by no more 						           
+                 than 1
