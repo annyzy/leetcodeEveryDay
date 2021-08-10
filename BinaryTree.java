@@ -119,9 +119,9 @@ public class BinaryTree {
         tree1.add(root1, 9);
         System.out.print("Traversing tree in order: ");
         tree1.inorderTraversal(root1);
-        boolean ans1 = isSymmetric(root1);
+        isSymmetric(root1);
         int tree1Depth = maxDepth(root1);
-        System.out.println("Tree1 depth is " + tree1Depth);
+        System.out.println("Tree1 depth is " + tree1Depth + ".");
         if( isBalanced(root1) == true){
             System.out.println("Tree1 is a balanced tree.");
         }else{
@@ -141,9 +141,9 @@ public class BinaryTree {
         root2.right.right = new TreeNode(9);
         System.out.print("Traversing tree2 in order: ");
         tree2.inorderTraversal(root2);
-        boolean ans2 = isSymmetric(root2);
+        isSymmetric(root2);
         int tree2Depth = maxDepth(root2);
-        System.out.println("Tree2 depth is " + tree2Depth);
+        System.out.println("Tree2 depth is " + tree2Depth + ".");
         if( isBalanced(root2) == true){
             System.out.println("Tree2 is a balanced tree.");
         }else{
