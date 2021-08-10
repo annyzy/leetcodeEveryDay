@@ -97,6 +97,15 @@ public class BinaryTree {
         }
     }
 
+    public static boolean isBalanced(TreeNode root) {
+        if ( root == null ) {
+            return true;
+        }else{
+            return Math.abs( maxDepth(root.left)- maxDepth(root.right)) <=1 && isBalanced( root.right ) && isBalanced( root.left);
+        }  
+    }
+    
+
     public static void main(String args[]) {
         BinaryTree tree1 = new BinaryTree();
         TreeNode root1 = new TreeNode(5);
@@ -113,6 +122,11 @@ public class BinaryTree {
         boolean ans1 = isSymmetric(root1);
         int tree1Depth = maxDepth(root1);
         System.out.println("Tree1 depth is " + tree1Depth);
+        if( isBalanced(root1) == true){
+            System.out.println("Tree1 is a balanced tree.");
+        }else{
+            System.out.println("Tree1 is not a balanced tree.");
+        }
 
         System.out.println("");
 
@@ -130,5 +144,25 @@ public class BinaryTree {
         boolean ans2 = isSymmetric(root2);
         int tree2Depth = maxDepth(root2);
         System.out.println("Tree2 depth is " + tree2Depth);
+        if( isBalanced(root2) == true){
+            System.out.println("Tree2 is a balanced tree.");
+        }else{
+            System.out.println("Tree2 is not a balanced tree.");
+        }
+
+        System.out.println("");
+
+        BinaryTree tree3 = new BinaryTree();
+        TreeNode root3 = new TreeNode(1);
+        System.out.println("Creating a symmetric binary tree3 with root value " + root3.val);;
+        root3.right = new TreeNode(2);
+        root3.right.right = new TreeNode(3);
+        System.out.print("Traversing tree3 in order: ");
+        tree3.inorderTraversal(root3);
+        if( isBalanced(root3) == true){
+            System.out.println("Tree3 is a balanced tree.");
+        }else{
+            System.out.println("Tree3 is not a balanced tree.");
+        }
     }
 }
