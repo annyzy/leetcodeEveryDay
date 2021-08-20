@@ -105,6 +105,31 @@ public class BinaryTree {
         }  
     }
     
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode a, TreeNode b){
+        if (root ==  null){
+            return null;
+        }
+
+        if( (root == a || root == b) || ( root == a && root == b) ){
+            System.out.println("Lowest common ancestor of Node " + a.val + " and Node " + b.val + " is " 
+            + root.val);
+            return root;
+        }
+
+        TreeNode leftSearchTree = lowestCommonAncestor(root.left, a, b);
+        TreeNode rightSearchTree = lowestCommonAncestor(root.right, a, b);
+
+        if(leftSearchTree == null && rightSearchTree == null){
+            return null;
+        }
+        if (leftSearchTree == null){
+            return rightSearchTree;
+        }
+        if( rightSearchTree == null){
+            return leftSearchTree;
+        }
+        return root;
+    }
 
     public static void main(String args[]) {
         BinaryTree tree1 = new BinaryTree();
