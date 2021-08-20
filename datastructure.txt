@@ -2,5 +2,8 @@ Binary Tree
 	Height
 		the largest # of edges in a path from a leaf node to a target node 
 	Balanced Binary Tree
-		the left and right subtrees of every node differ in height by no more 						           
-                 than 1
+		the left and right subtrees of every node differ in height by no more 			     
+                than 1
+	Recursive Approach
+		Policy #1: What need to happen just in "Single Node"
+		Policy #2: Base Case
