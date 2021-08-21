@@ -1,4 +1,7 @@
 Binary Tree
+	Interview Skill
+		#1: What do I already know:
+			Tree is also a graph, an acyclic connected graph
 	Height
 		the largest # of edges in a path from a leaf node to a target node 
 	Balanced Binary Tree
