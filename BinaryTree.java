@@ -48,8 +48,37 @@ public class BinaryTree {
     }
 
     public List<List<Integer>> levelOrder(TreeNode root) {
-    // A extension of BFS approach
-    
+        // A extension of BFS approach
+        // Creat a list of list to store the levelOrder result
+        List<List<Integer>> list = new ArrayList<>();
+
+        // Creat a queue to temporarily store the nodes of each level
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        if (root == null) {
+            System.out.println("This tree is invalid.");
+            return list;
+        } else {
+            queue.add(root);
+        }
+
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+            // Creat a list to store each level of the tree
+            List<Integer> level = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                // Remove the head element of the queue and put it into each level
+                TreeNode node = queue.poll();
+                level.add(node.val);
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+            list.add(level);
+        }
+        return list;
     }
 
     public void helper1(TreeNode root, List<Integer> res) {
@@ -103,34 +132,34 @@ public class BinaryTree {
     }
 
     public static boolean isBalanced(TreeNode root) {
-        if ( root == null ) {
+        if (root == null) {
             return true;
-        }else{
-            return Math.abs( maxDepth(root.left)- maxDepth(root.right)) <=1 && isBalanced( root.right ) && isBalanced( root.left);
-        }  
+        } else {
+            return Math.abs(maxDepth(root.left) - maxDepth(root.right)) <= 1 && isBalanced(root.right)
+                    && isBalanced(root.left);
+        }
     }
-    
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode a, TreeNode b){
-        if (root ==  null){
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode a, TreeNode b) {
+        if (root == null) {
             return null;
         }
 
-        if( (root == a || root == b) || ( root == a && root == b) ){
-            System.out.println("Lowest common ancestor of Node " + a.val + " and Node " + b.val + " is " 
-            + root.val);
+        if ((root == a || root == b) || (root == a && root == b)) {
+            System.out.println("Lowest common ancestor of Node " + a.val + " and Node " + b.val + " is " + root.val);
             return root;
         }
 
         TreeNode leftSearchTree = lowestCommonAncestor(root.left, a, b);
         TreeNode rightSearchTree = lowestCommonAncestor(root.right, a, b);
 
-        if(leftSearchTree == null && rightSearchTree == null){
+        if (leftSearchTree == null && rightSearchTree == null) {
             return null;
         }
-        if (leftSearchTree == null){
+        if (leftSearchTree == null) {
             return rightSearchTree;
         }
-        if( rightSearchTree == null){
+        if (rightSearchTree == null) {
             return leftSearchTree;
         }
         return root;
@@ -152,9 +181,9 @@ public class BinaryTree {
         isSymmetric(root1);
         int tree1Depth = maxDepth(root1);
         System.out.println("Tree1 depth is " + tree1Depth + ".");
-        if( isBalanced(root1) == true){
+        if (isBalanced(root1) == true) {
             System.out.println("Tree1 is a balanced tree.");
-        }else{
+        } else {
             System.out.println("Tree1 is not a balanced tree.");
         }
 
@@ -174,9 +203,9 @@ public class BinaryTree {
         isSymmetric(root2);
         int tree2Depth = maxDepth(root2);
         System.out.println("Tree2 depth is " + tree2Depth + ".");
-        if( isBalanced(root2) == true){
+        if (isBalanced(root2) == true) {
             System.out.println("Tree2 is a balanced tree.");
-        }else{
+        } else {
             System.out.println("Tree2 is not a balanced tree.");
         }
 
@@ -184,14 +213,15 @@ public class BinaryTree {
 
         BinaryTree tree3 = new BinaryTree();
         TreeNode root3 = new TreeNode(1);
-        System.out.println("Creating a symmetric binary tree3 with root value " + root3.val);;
+        System.out.println("Creating a symmetric binary tree3 with root value " + root3.val);
+        ;
         root3.right = new TreeNode(2);
         root3.right.right = new TreeNode(3);
         System.out.print("Traversing tree3 in order: ");
         tree3.inorderTraversal(root3);
-        if( isBalanced(root3) == true){
+        if (isBalanced(root3) == true) {
             System.out.println("Tree3 is a balanced tree.");
-        }else{
+        } else {
             System.out.println("Tree3 is not a balanced tree.");
         }
     }
