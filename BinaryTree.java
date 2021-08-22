@@ -66,7 +66,7 @@ public class BinaryTree {
         List<List<Integer>> list = new ArrayList<>();
 
         // Creat a queue to temporarily store the nodes of each level
-
+        Queue<TreeNode> queue = new ArrayDeque<>();
         if (root == null) {
             System.out.println("This tree is invalid.");
             return list;
@@ -105,7 +105,7 @@ public class BinaryTree {
             queue.add(root);
         }
 
-        //level order from left to right(even level) or right to left(odd level)
+        // level order from left to right(even level) or right to left(odd level)
         boolean evenLevel = true;
 
         while (!queue.isEmpty()) {
@@ -116,7 +116,7 @@ public class BinaryTree {
                 if (evenLevel) {
                     level.add(node.val);
                 } else {
-                    //Add a new node val at index 0 to realize right to left order
+                    // Add a new node val at index 0 to realize right to left order
                     level.add(0, node.val);
                 }
                 if (node.left != null) {
@@ -176,6 +176,26 @@ public class BinaryTree {
             return Math.abs(maxDepth(root.left) - maxDepth(root.right)) <= 1 && isBalanced(root.right)
                     && isBalanced(root.left);
         }
+    }
+
+    long previous = Long.MIN_VALUE;
+
+    public boolean isValidBST(TreeNode root) {
+        if (root == null)
+            return true;
+
+        // visit left subtree
+        if (!isValidBST(root.left))
+            return false;
+
+        // visit current node
+        if (root.val <= previous)
+            return false;
+
+        previous = root.val;
+
+        // visit left subtree
+        return isValidBST(root.right);
     }
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode a, TreeNode b) {
