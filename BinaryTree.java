@@ -47,13 +47,26 @@ public class BinaryTree {
         return res;
     }
 
+    public void helper1(TreeNode root, List<Integer> res) {
+        if (root == null)
+            return;
+
+        if (root.left != null) {
+            helper1(root.left, res);
+        }
+        res.add(root.val);
+        if (root.right != null) {
+            helper1(root.right, res);
+        }
+    }
+
     public List<List<Integer>> levelOrder(TreeNode root) {
         // A extension of BFS approach
         // Creat a list of list to store the levelOrder result
         List<List<Integer>> list = new ArrayList<>();
 
         // Creat a queue to temporarily store the nodes of each level
-        Queue<TreeNode> queue = new ArrayDeque<>();
+
         if (root == null) {
             System.out.println("This tree is invalid.");
             return list;
@@ -81,17 +94,42 @@ public class BinaryTree {
         return list;
     }
 
-    public void helper1(TreeNode root, List<Integer> res) {
-        if (root == null)
-            return;
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> list = new ArrayList<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
 
-        if (root.left != null) {
-            helper1(root.left, res);
+        if (root == null) {
+            System.out.println("This tree is invalid.");
+            return list;
+        } else {
+            queue.add(root);
         }
-        res.add(root.val);
-        if (root.right != null) {
-            helper1(root.right, res);
+
+        //level order from left to right(even level) or right to left(odd level)
+        boolean evenLevel = true;
+
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+            List<Integer> level = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                TreeNode node = queue.poll();
+                if (evenLevel) {
+                    level.add(node.val);
+                } else {
+                    //Add a new node val at index 0 to realize right to left order
+                    level.add(0, node.val);
+                }
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+            evenLevel = !evenLevel;
+            list.add(level);
         }
+        return list;
     }
 
     public static boolean isSymmetric(TreeNode root) {
