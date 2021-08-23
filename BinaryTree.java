@@ -223,6 +223,22 @@ public class BinaryTree {
         return root;
     }
 
+    public TreeNode sortedArrayToBST(int[] nums) {
+        int n = nums.length - 1;
+        return helper3(nums, 0, n);
+    }
+
+    public TreeNode helper3(int[] nums, int left, int right) {
+        if (left > right)
+            return null;
+
+        int mid = (left + right) / 2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = helper3(nums, left, mid - 1);
+        root.right = helper3(nums, mid + 1, right);
+        return root;
+    }
+
     public static void main(String args[]) {
         BinaryTree tree1 = new BinaryTree();
         TreeNode root1 = new TreeNode(5);
