@@ -179,20 +179,30 @@ public class SingleLinkedList {
 		node.next = node.next.next;
 	}
 
-	public ListNode deleteNodeVersion2(ListNode head, int node) {
-		ListNode curr = head;
-		ListNode pre = null;
-		
-		while(curr != null && curr.next!= null){
-			if(curr.val!= node){
-				pre = curr;
-				curr = curr.next;
-			} else{
-				pre.next = pre.next.next;
-			}
+	public void deleteNodeVersion2(int pos) {
+		if (head==null) return;
+
+		ListNode prev = head;
+
+		//if delete head
+		if (pos == 0 ){
+			head = prev.next;
+			System.out.println("Delete position " + pos + " in linked list.");
+			return;
 		}
 
-		return head;
+		//find the previous position of the target
+		for(int i = 0; prev!=null && i < pos-1; i ++) prev = prev.next;
+
+		if(prev == null || prev.next == null) {
+			System.out.println("The position " + pos + " you want to delete exceeds the number of nodes.");
+			return;
+		}
+
+		//relink the previous position and the next position
+		System.out.println("Delete position " + pos + " in linked list.");
+		ListNode next = prev.next.next;
+		prev.next = next;
 	}
 
 	public static void main(String[] args) {
@@ -202,7 +212,9 @@ public class SingleLinkedList {
 		System.out.print("The first list l1 : ");
 		l1.display();
 		l1.isPalindrome(l1.head);
-		l1.head = l1.deleteNodeVersion2(l1.head, 2);
+		l1.deleteNodeVersion2(0);
+		System.out.print("The result list l1 : ");
+		l1.display();
 
 		System.out.println();
 		SingleLinkedList l2 = new SingleLinkedList();
