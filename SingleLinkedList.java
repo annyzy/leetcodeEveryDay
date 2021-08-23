@@ -81,11 +81,10 @@ public class SingleLinkedList {
 	public boolean hasCycle(ListNode head) {
 		HashSet<ListNode> seenNodes = new HashSet<>();
 
-		if (head == null){
+		if (head == null) {
 			System.out.println("Invalid cycle linked list: no head provided.");
 			return false;
 		}
-			
 
 		while (head != null) {
 			if (seenNodes.contains(head)) {
@@ -143,15 +142,15 @@ public class SingleLinkedList {
 	}
 
 	public boolean isPalindrome(ListNode head) {
-		if ( head ==  null ) {
+		if (head == null) {
 			System.out.println("Invalid palindrome list: no head provided.");
 			return false;
 		}
 
-		List<Integer> list =  new ArrayList<Integer>();
+		List<Integer> list = new ArrayList<Integer>();
 
 		ListNode curr = head;
-		while( curr != null ){
+		while (curr != null) {
 			list.add(curr.val);
 			curr = curr.next;
 		}
@@ -159,18 +158,17 @@ public class SingleLinkedList {
 		int front = 0;
 		int back = list.size() - 1;
 
-		while(front < back){
-			if( list.get(front) == list.get(back)){
-				front ++;
-				back --;
-			}else{
+		while (front < back) {
+			if (list.get(front) == list.get(back)) {
+				front++;
+				back--;
+			} else {
 				System.out.println("Not a palindrome");
 				return false;
 			}
 		}
 		System.out.println("Is a palindrome.");
 		return true;
-
 	}
 
 	public static void main(String[] args) {
