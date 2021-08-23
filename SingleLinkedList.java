@@ -171,6 +171,14 @@ public class SingleLinkedList {
 		return true;
 	}
 
+	public void deleteNodeVersion1(ListNode node) {
+		// Can't find the previous node of the target, so we simply replace the next
+		// node's val to taget's val, and connect the "target" to the next of the next
+		// node
+		node.val = node.next.val;
+		node.next = node.next.next;
+	}
+
 	public static void main(String[] args) {
 		SingleLinkedList l1 = new SingleLinkedList();
 		l1.appendToTail(1);
