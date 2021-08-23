@@ -31,14 +31,14 @@ public class SingleLinkedList {
 	}
 
 	public void display() {
-		ListNode current = head;
+		ListNode curr = head;
 		if (head == null) {
 			System.out.println("List is empty");
 			return;
 		}
-		while (current != null) {
-			System.out.print(current.val + " ");
-			current = current.next;
+		while (curr != null) {
+			System.out.print(curr.val + " ");
+			curr = curr.next;
 		}
 
 		System.out.println();
@@ -67,12 +67,12 @@ public class SingleLinkedList {
 	}
 
 	public ListNode deleteDuplicates(ListNode head) {
-		ListNode current = head;
-		while (current != null && current.next != null) {
-			if (current.next.val == current.val) {
-				current.next = current.next.next;
+		ListNode curr = head;
+		while (curr != null && curr.next != null) {
+			if (curr.next.val == curr.val) {
+				curr.next = curr.next.next;
 			} else {
-				current = current.next;
+				curr = curr.next;
 			}
 		}
 		return head;
@@ -179,6 +179,22 @@ public class SingleLinkedList {
 		node.next = node.next.next;
 	}
 
+	public ListNode deleteNodeVersion2(ListNode head, int node) {
+		ListNode curr = head;
+		ListNode pre = null;
+		
+		while(curr != null && curr.next!= null){
+			if(curr.val!= node){
+				pre = curr;
+				curr = curr.next;
+			} else{
+				pre.next = pre.next.next;
+			}
+		}
+
+		return head;
+	}
+
 	public static void main(String[] args) {
 		SingleLinkedList l1 = new SingleLinkedList();
 		l1.appendToTail(1);
@@ -186,6 +202,7 @@ public class SingleLinkedList {
 		System.out.print("The first list l1 : ");
 		l1.display();
 		l1.isPalindrome(l1.head);
+		l1.head = l1.deleteNodeVersion2(l1.head, 2);
 
 		System.out.println();
 		SingleLinkedList l2 = new SingleLinkedList();
