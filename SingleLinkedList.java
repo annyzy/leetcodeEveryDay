@@ -295,6 +295,9 @@ public class SingleLinkedList {
 		l2.head = l2.removeNthFromEnd(l2.head, 1);
 		System.out.print("The result list l2 : ");
 		l2.display();
+		l2.head = l2.addTwoNumbers(l1.head, l2.head);
+		System.out.print("The result list l2 after adding l1 and l2 : ");
+		l2.display();
 
 		System.out.println();
 		System.out.println("Merge l1 and l2 to l3:");
