@@ -13,6 +13,11 @@ public class SingleLinkedList {
 			this.val = val;
 			this.next = null;
 		}
+
+		public ListNode(int val, ListNode next) {
+			this.val = val;
+			this.next = next;
+		}
 	}
 
 	public ListNode head = null;
@@ -180,68 +185,95 @@ public class SingleLinkedList {
 	}
 
 	public void deleteNodeVersion2(int pos) {
-		if (head==null) return;
+		if (head == null)
+			return;
 
 		ListNode prev = head;
 
-		//if delete head
-		if (pos == 0 ){
+		// if delete head
+		if (pos == 0) {
 			head = prev.next;
 			System.out.println("Delete position " + pos + " in linked list.");
 			return;
 		}
 
-		//find the previous position of the target
-		for(int i = 0; prev!=null && i < pos-1; i ++) prev = prev.next;
+		// find the previous position of the target
+		for (int i = 0; prev != null && i < pos - 1; i++)
+			prev = prev.next;
 
-		if(prev == null || prev.next == null) {
+		if (prev == null || prev.next == null) {
 			System.out.println("The position " + pos + " you want to delete exceeds the number of nodes.");
 			return;
 		}
 
-		//relink the previous position and the next position
+		// relink the previous position and the next position
 		System.out.println("Delete position " + pos + " in linked list.");
 		ListNode next = prev.next.next;
 		prev.next = next;
 	}
 
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        if (l1 ==  null && l2 == null ){
-            System.out.println("Invalid two lists provided.");
-            return null;
-        }  
-        
-        ListNode dummy = new ListNode(0);
-        ListNode a = l1, b = l2, curr = dummy;
-        int carry = 0;
-        
-        while( a!= null || b!= null){
-            int val1, val2;
-            if( a != null){
-                val1 = a.val;
-                a = a.next;
-            }else{
-                val1 = 0; 
-            }
-            
-            if( b != null){
-                val2 = b.val;
-                b=b.next;
-            }else{
-                val2 = 0;
-            }
-            
-            int sum = val1+val2+carry;
-            carry = sum/10;
-            curr.next = new ListNode(sum % 10);
-            curr = curr.next;
-        }
-                    
-        if(carry > 0){
-            curr.next = new ListNode(carry);
-        } 
-        return dummy.next; 
-    }
+		if (l1 == null && l2 == null) {
+			System.out.println("Invalid two lists provided.");
+			return null;
+		}
+
+		ListNode dummy = new ListNode(0);
+		ListNode a = l1, b = l2, curr = dummy;
+		int carry = 0;
+
+		while (a != null || b != null) {
+			int val1, val2;
+			if (a != null) {
+				val1 = a.val;
+				a = a.next;
+			} else {
+				val1 = 0;
+			}
+
+			if (b != null) {
+				val2 = b.val;
+				b = b.next;
+			} else {
+				val2 = 0;
+			}
+
+			int sum = val1 + val2 + carry;
+			carry = sum / 10;
+			curr.next = new ListNode(sum % 10);
+			curr = curr.next;
+		}
+
+		if (carry > 0) {
+			curr.next = new ListNode(carry);
+		}
+		return dummy.next;
+	}
+
+	public ListNode removeNthFromEnd(ListNode head, int n) {
+		if (head == null) {
+			System.out.println("The list is invalid.");
+			return null;
+		}
+
+		ListNode dummy = new ListNode(0, head);
+		Deque<ListNode> stack = new ArrayDeque<ListNode>();
+		ListNode curr = dummy;
+
+		while (curr != null) {
+			stack.push(curr);
+			curr = curr.next;
+		}
+
+		for (int i = 0; i < n; i++) {
+			stack.pop();
+		}
+
+		ListNode pre = stack.peek();
+		System.out.println("Remove " + n + "th node from the end of the list.");
+		pre.next = pre.next.next;
+		return dummy.next;
+	}
 
 	public static void main(String[] args) {
 		SingleLinkedList l1 = new SingleLinkedList();
@@ -259,6 +291,9 @@ public class SingleLinkedList {
 		l2.appendToTail(1);
 		l2.appendToTail(3);
 		System.out.print("The second list l2 : ");
+		l2.display();
+		l2.head = l2.removeNthFromEnd(l2.head, 1);
+		System.out.print("The result list l2 : ");
 		l2.display();
 
 		System.out.println();
