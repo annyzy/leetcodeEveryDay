@@ -10,3 +10,13 @@ Binary Tree
 	Recursive Approach
 		Policy #1: What need to happen just in "Single Node"
 		Policy #2: Base Case
+		
+Least Recently Used (LRU) cache
+	Data Structure Implementations:
+		1. Queue, suing a double linked list. 
+		2. A Hash, with page number as key and address of the corresponding queue node as value.
+	Paging
+		a memory management scheme
+		break physical memory into fixed-size blocks called frames and logical memory into blocks of same size 			called pages.
+		
+	
