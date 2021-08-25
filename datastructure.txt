@@ -18,5 +18,13 @@ Least Recently Used (LRU) cache
 	Paging
 		a memory management scheme
 		break physical memory into fixed-size blocks called frames and logical memory into blocks of same size 			called pages.
-		
+	Reference a page
+		If the page is in the memory: 
+			detach the node of the list and bring it to the front of the queue.
+		else:
+			add a new node to the front of the queue
+			update the corresponding node address in the hash
+			if the queue is full
+				remove a node from the rear of the queue
+				add the new node to the front of the queue
 	
