@@ -275,6 +275,70 @@ public class SingleLinkedList {
 		return dummy.next;
 	}
 
+	public ListNode sortList(ListNode head) {
+		// edge case
+		if (head == null || head.next == null) {
+			return head;
+		}
+
+		ListNode mid = cutHalf(head);
+		ListNode left = sortList(head);
+		ListNode right = sortList(mid);
+
+		ListNode ans = merge(left, right);
+		return ans;
+	}
+
+	public ListNode merge(ListNode l1, ListNode l2) {
+		if (l1 == null && l2 == null) {
+			return null;
+		}
+		if (l1 == null)
+			return l2;
+		if (l2 == null)
+			return l1;
+
+		ListNode dummy = new ListNode();
+		ListNode end = dummy;
+		while (l1 != null && l2 != null) {
+			// put the node with the smaller value from left to right
+			if (l1.val < l2.val) {
+				end.next = l1;
+				l1 = l1.next;
+			} else {
+				end.next = l2;
+				l2 = l2.next;
+			}
+			end = end.next;
+		}
+		if (l1 != null) {
+			end.next = l1;
+		} else {
+			end.next = l2;
+		}
+		return dummy.next;
+	}
+
+	public ListNode cutHalf(ListNode head) {
+		// edge case
+		if (head == null)
+			return null;
+		ListNode slow = head, fast = head, slowPrev = null;
+
+		while (fast != null && fast.next != null) {
+			// store the node before the slow node
+			slowPrev = slow;
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+
+		// the node that is store is the half cut point
+		ListNode mid = slowPrev.next;
+		// cut the lists into half
+		slowPrev.next = null;
+		return mid;
+	}
+
 	public static void main(String[] args) {
 		SingleLinkedList l1 = new SingleLinkedList();
 		l1.appendToTail(1);
@@ -348,6 +412,9 @@ public class SingleLinkedList {
 		SingleLinkedList l7 = new SingleLinkedList();
 		l7.head = l6.reverseList(l6.head);
 		System.out.print("Reverse l6 to get l7 : ");
+		l7.display();
+		l7.head = l7.sortList(l7.head);
+		System.out.print("The result list l7 after sorting: ");
 		l7.display();
 	}
 }
