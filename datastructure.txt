@@ -27,4 +27,11 @@ Least Recently Used (LRU) cache
 			if the queue is full
 				remove a node from the rear of the queue
 				add the new node to the front of the queue
+Common Sorting Algorithms
+	Merge Sort: 
+		Runtime O(n log(n)) average and worst case
+		Memory: depends
+	Quick Sort:
+		Runtime O(n log(n)) average, O(n^2) worst case
+		Memory: O(log(n))
 	
