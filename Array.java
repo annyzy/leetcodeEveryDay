@@ -25,9 +25,36 @@ class Array {
             }
         }
 
-        //special case:[9,9,9]
+        // special case:[9,9,9]
         digits = new int[len + 1];
         digits[0] = 1;
         return digits;
+    }
+
+    public List<List<Integer>> pascalTriangle(int numRows) {
+        List<List<Integer>> triangle = new ArrayList<List<Integer>>();
+        // create a 2D array to store the value of each row
+        int[][] arr = new int[numRows][numRows];
+
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> row = new ArrayList<Integer>();
+            for (int j = 0; j <= i; j++) {
+                // edge case: if there is only one row
+                if (j == 0)
+                    arr[i][j] = 1;
+
+                // edge case: the start and the end of the row are all 1
+                else if (j == i)
+                    arr[i][j] = 1;
+
+                // the current value equal the left plus right value of the previous row
+                else {
+                    arr[i][j] = arr[i - 1][j - 1] + arr[i - 1][j];
+                }
+                row.add(arr[i][j]);
+            }
+            triangle.add(row);
+        }
+        return triangle;
     }
 }
