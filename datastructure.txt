@@ -17,7 +17,7 @@ Least Recently Used (LRU) cache
 		2. A Hash, with page number as key and address of the corresponding queue node as value.
 	Paging
 		a memory management scheme
-		break physical memory into fixed-size blocks called frames and logical memory into blocks of same size 			called pages.
+		break physical memory into fixed-size blocks called frames and logical memory into blocks of same size called pages.
 	Reference a page
 		If the page is in the memory: 
 			detach the node of the list and bring it to the front of the queue.
@@ -27,6 +27,7 @@ Least Recently Used (LRU) cache
 			if the queue is full
 				remove a node from the rear of the queue
 				add the new node to the front of the queue
+
 Common Sorting Algorithms
 	Merge Sort: 
 		Runtime O(n log(n)) average and worst case
@@ -34,4 +35,9 @@ Common Sorting Algorithms
 	Quick Sort:
 		Runtime O(n log(n)) average, O(n^2) worst case
 		Memory: O(log(n))
+
+Integer.MAX_VALUE: 2^31 - 1
+
+Integer.MIN_VALUE: -2^31
+
 	
