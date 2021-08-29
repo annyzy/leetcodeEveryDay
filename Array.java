@@ -91,4 +91,26 @@ class Array {
         }
         return max;
     }
+
+    public int singleNumber(int[] nums) {
+        if(nums == null || nums.length == 0) return 0;
+
+        HashSet<Integer> set = new HashSet<Integer>();
+        for (int i = 0; i < nums.length; i ++){
+            //return true is the element is not already present in the set, false if the set already contains ans remain unchange
+            if (!set.add(nums[i])){
+                set.remove(nums[i]);
+            }
+        }
+        
+        //find the first element of the set, which is that single one
+        int firstEle = 0; 
+        for(int val : set){
+            firstEle = val;
+            break;
+        }
+        
+        // return set.stream().findFirst().get();
+        return firstEle;
+    }
 }
