@@ -2,7 +2,8 @@ import java.util.*;
 
 class Array {
     public int maxSubArray(int[] nums) {
-        if(nums==null || nums.length == 0) return 0;
+        if (nums == null || nums.length == 0)
+            return 0;
         int prev = 0, ans = nums[0];
 
         for (int x : nums) {
@@ -16,7 +17,8 @@ class Array {
     }
 
     public int[] plusOne(int[] digits) {
-        if(nums==null || nums.length == 0) return null;
+        if (nums == null || nums.length == 0)
+            return null;
         int len = digits.length;
         for (int i = len - 1; i >= 0; i--) {
             if (digits[i] == 9) {
@@ -61,20 +63,21 @@ class Array {
     }
 
     public void mergeSortedArray(int[] nums1, int m, int[] nums2, int n) {
-        for (int i = 0; i < n; i ++){
-            nums1[m+i] = nums2[i];
-        }   
+        for (int i = 0; i < n; i++) {
+            nums1[m + i] = nums2[i];
+        }
         Arrays.sort(nums1);
     }
 
     public int maxProfit1(int[] prices) {
         int len = prices.length;
-        if(prices == null || len == 0) return 0;
+        if (prices == null || len == 0)
+            return 0;
         int max = 0, profit = Integer.MAX_VALUE;
-        for (int i  = 0; i < len; i ++){
-            if(prices[i]< profit){
+        for (int i = 0; i < len; i++) {
+            if (prices[i] < profit) {
                 profit = prices[i];
-            }else if(prices[i] - profit > max){
+            } else if (prices[i] - profit > max) {
                 max = prices[i] - profit;
             }
         }
@@ -83,34 +86,46 @@ class Array {
 
     public int maxProfit2(int[] prices) {
         int len = prices.length;
-        if(prices == null || len == 0) return 0;   
+        if (prices == null || len == 0)
+            return 0;
         int max = 0;
-        for (int i  = 1; i < len; i ++){
-            //greedy method: finding the local maxprofit at each stage
-            max = max + Math.max(0, prices[i] -prices[i-1] );
+        for (int i = 1; i < len; i++) {
+            // greedy method: finding the local maxprofit at each stage
+            max = max + Math.max(0, prices[i] - prices[i - 1]);
         }
         return max;
     }
 
     public int singleNumber(int[] nums) {
-        if(nums == null || nums.length == 0) return 0;
+        if (nums == null || nums.length == 0)
+            return 0;
 
         HashSet<Integer> set = new HashSet<Integer>();
-        for (int i = 0; i < nums.length; i ++){
-            //return true is the element is not already present in the set, false if the set already contains ans remain unchange
-            if (!set.add(nums[i])){
+        for (int i = 0; i < nums.length; i++) {
+            // return true is the element is not already present in the set, false if the
+            // set already contains ans remain unchange
+            if (!set.add(nums[i])) {
                 set.remove(nums[i]);
             }
         }
-        
-        //find the first element of the set, which is that single one
-        int firstEle = 0; 
-        for(int val : set){
+
+        // find the first element of the set, which is that single one
+        int firstEle = 0;
+        for (int val : set) {
             firstEle = val;
             break;
         }
-        
+
         // return set.stream().findFirst().get();
         return firstEle;
+    }
+
+    public int majorityElement(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return 0;
+
+        Arrays.sort(nums);
+        //the median number
+        return nums[nums.length / 2];
     }
 }
