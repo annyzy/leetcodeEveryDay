@@ -2,7 +2,7 @@ import java.util.*;
 
 class Array {
     public int maxSubArray(int[] nums) {
-        if(nums.length == 0) return 0;
+        if(nums==null || nums.length == 0) return 0;
         int prev = 0, ans = nums[0];
 
         for (int x : nums) {
@@ -16,6 +16,7 @@ class Array {
     }
 
     public int[] plusOne(int[] digits) {
+        if(nums==null || nums.length == 0) return null;
         int len = digits.length;
         for (int i = len - 1; i >= 0; i--) {
             if (digits[i] == 9) {
@@ -66,16 +67,27 @@ class Array {
         Arrays.sort(nums1);
     }
 
-    public int maxProfit(int[] prices) {
+    public int maxProfit1(int[] prices) {
         int len = prices.length;
-        if(len == 0) return 0;
+        if(prices == null || len == 0) return 0;
         int max = 0, profit = Integer.MAX_VALUE;
-        for (int i  = 1; i < len; i ++){
+        for (int i  = 0; i < len; i ++){
             if(prices[i]< profit){
                 profit = prices[i];
             }else if(prices[i] - profit > max){
                 max = prices[i] - profit;
             }
+        }
+        return max;
+    }
+
+    public int maxProfit2(int[] prices) {
+        int len = prices.length;
+        if(prices == null || len == 0) return 0;   
+        int max = 0;
+        for (int i  = 1; i < len; i ++){
+            //greedy method: finding the local maxprofit at each stage
+            max = max + Math.max(0, prices[i] -prices[i-1] );
         }
         return max;
     }
