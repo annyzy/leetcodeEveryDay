@@ -2,6 +2,7 @@ import java.util.*;
 
 class Array {
     public int maxSubArray(int[] nums) {
+        if(nums.length == 0) return 0;
         int prev = 0, ans = nums[0];
 
         for (int x : nums) {
@@ -63,5 +64,19 @@ class Array {
             nums1[m+i] = nums2[i];
         }   
         Arrays.sort(nums1);
+    }
+
+    public int maxProfit(int[] prices) {
+        int len = prices.length;
+        if(len == 0) return 0;
+        int max = 0, profit = Integer.MAX_VALUE;
+        for (int i  = 1; i < len; i ++){
+            if(prices[i]< profit){
+                profit = prices[i];
+            }else if(prices[i] - profit > max){
+                max = prices[i] - profit;
+            }
+        }
+        return max;
     }
 }
