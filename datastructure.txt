@@ -36,6 +36,9 @@ Common Sorting Algorithms
 		Runtime O(n log(n)) average, O(n^2) worst case
 		Memory: O(log(n))
 
+Topological Sorting
+	A linear ordering version of Directed Acyclic Graph(DAG)
+
 Integer.MAX_VALUE: 2^31 - 1
 
 Integer.MIN_VALUE: -2^31
