@@ -184,7 +184,7 @@ class Array {
             return null;
         // iterate the shorter array first to reduce the space complexity
         if (nums1.length > nums2.length)
-            return intersect(nums2, nums1);
+            return intersectOfTwoArrays(nums2, nums1);
 
         /*
          * Creat a map to store the elements in nums1 as key, and the numbers of each
@@ -232,5 +232,37 @@ class Array {
          * from 0 to i of ans to a new array
          */
         return Arrays.copyOfRange(ans, 0, i);
+    }
+
+    public int romanToInt(String s) {
+        // edge case
+        if (s.isEmpty())
+            return 0;
+
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+
+        int len = s.length();
+        int ans = 0;
+        int prev = map.get(s.charAt(0));
+        for (int i = 1; i < len; i++) {
+            int num = map.get(s.charAt(i));
+            // such as: IV=5-1
+            if (prev < num) {
+                ans = ans - prev;
+                // such as: VI = 5+1
+            } else {
+                ans = ans + prev;
+            }
+            prev = num;
+        }
+        ans = ans + prev;
+        return ans;
     }
 }
