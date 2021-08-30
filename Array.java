@@ -284,7 +284,7 @@ class Array {
         return ans;
     }
 
-    public boolean isAnagram(String s, String t) {
+    public boolean isAnagram1(String s, String t) {
         if (s.isEmpty() && t.isEmpty())
             return false;
         if (s.length() != t.length())
@@ -296,5 +296,30 @@ class Array {
         Arrays.sort(t1);
 
         return Arrays.equals(s1, t1);
+    }
+
+    public int firstUniqChar(String s) {
+        // edge case
+        if (s.isEmpty())
+            return -1;
+
+        //requir contain only lower cases
+        for (char c : s.toCharArray()) {
+            if (!Character.isLowerCase(c))
+                    return -1;
+        }
+        int[] arr = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            //counts up the number of occurrences of each letter in s
+            //-'a': "shifts" the ascii/unicode value so that A - Z have values 0 - 25. 
+            arr[s.charAt(i) - 'a']++;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            if (arr[s.charAt(i) - 'a'] == 1) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }
