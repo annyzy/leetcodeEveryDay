@@ -265,4 +265,22 @@ class Array {
         ans = ans + prev;
         return ans;
     }
+
+    public int titleToNumber(String columnTitle) {
+        // edge cases
+        if (columnTitle.isEmpty())
+            return 0;
+        for (char c : columnTitle.toCharArray()) {
+            if (!Character.isUpperCase(c))
+                return 0;
+        }
+
+        int ans = 0;
+        for (int i = 0; i < columnTitle.length(); i++) {
+            // Base 26 calculation
+            int num = columnTitle.charAt(i) - 'A' + 1;
+            ans = ans * 26 + num;
+        }
+        return ans;
+    }
 }
