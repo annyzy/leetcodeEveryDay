@@ -5,12 +5,27 @@ class bitManipulation {
     public int hammingWeight(int n) {
         int count = 0;
         for (int i = 0; i < 32; i++) {
-            // if n&1 = 1, then the least sig fig is 1; else 0
+            // 1 & 1 = 1; 0 & 1 = 0
             count += n & 1;
-            // shit to right by 1
+            // arithmetic shit to right by 1
             n = n >> 1;
         }
         return count;
+    }
+
+    // you need treat n as an unsigned value
+    public int reverseBits(int n) {
+        // edge case
+        if (n == 0)
+            return 0;
+
+        int ans = 0;
+        for (int i = 0; i < 32; i++) {
+            ans = ans | ((n & 1) << (31 - i));
+            // logical shit to right by 1
+            n = n >>> 1;
+        }
+        return ans;
     }
 
     public List<List<Integer>> subsets(int[] nums) {
