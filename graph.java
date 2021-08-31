@@ -40,7 +40,7 @@ class graph {
             }
         }
     
-        //queue: 0 1 2
+        //create a queue to store the node that has 0 degree, queue: 0 1 2
         Queue<Integer> queue = new LinkedList<>();
         for(int i = 0; i < numCourses; i++){
             if(degree[i] ==0) queue.add(i);
@@ -48,15 +48,21 @@ class graph {
 
         //BFS
         while( !queue.isEmpty()){
+            //start from the course that are the prereq to other courses
             int temp = queue.poll();
+            //get a list of courses that can take after finishing the prereq
             List<Integer> take = map.get(temp);
             for(int i = 0; take!=null && i <take.size(); i++){
+                //once reach a course from prereq, deduct the degree by 1(marked as visited)
                 degree[take.get(i)]--;
+                //once cannot reach any course from prereq, have done the breath first search of that prereq
+                //put that course to the queue list,treat as 0 degree
                 if(degree[take.get(i)] == 0) queue.add(take.get(i));
             }
         }
 
         for(int i = 0; i <numCourses; i++){
+            //if a degree is not 0 for a node, means it cannot be reached
             if(degree[i]!= 0) return false;
         }
         return true;
