@@ -16,4 +16,31 @@ class dynamicProgramming {
         }
         return dp[n];
     }
+
+    public String longestPalindrome(String s){
+        //edge case
+        if (s.length() <= 1) return s;
+        
+        int len = s.length();
+        boolean[][] dp = new boolean[len][len];
+        String ans = "";
+
+        for(int  j = 1; j < len; j++){
+            for (int i = 0; i < j; i++){
+                if(s.charAt(i) != s.charAt(j)) continue;
+                if(i == j) {
+                    dp[i][j] = true;
+                } else if(j-i <=2){
+                    dp[i][j] = true;
+                }else{
+                    dp[i][j] = dp[i+1][j-1];
+                }
+
+                if(dp[i][j] && j - i +1 > ans.length()){
+                    ans = s.substring(i, j+1);
+                }
+            }
+        }
+        return ans;
+    } 
 }
