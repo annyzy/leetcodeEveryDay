@@ -21,6 +21,7 @@ class bitManipulation {
 
         int ans = 0;
         for (int i = 0; i < 32; i++) {
+            // 1|1=1, 1|0 = 0|1 = 1, 0|0 = 0
             ans = ans | ((n & 1) << (31 - i));
             // logical shit to right by 1
             n = n >>> 1;
@@ -49,5 +50,24 @@ class bitManipulation {
             list.add(temp);
         }
         return list;
+    }
+
+    public int reverseInteger(int x) {
+        int ans = 0;
+        while (x != 0) {
+            // get the last digit
+            int tmp = x % 10;
+            // cannot larger than the largest value
+            if (ans > Integer.MAX_VALUE / 10 || (ans == Integer.MAX_VALUE / 10 && tmp > 7)) {
+                return 0;
+            }
+            // cannot smaller than the smallest value
+            if (ans < -Integer.MIN_VALUE / 10 || (ans == -Integer.MIN_VALUE / 10 && tmp < -8)) {
+                return 0;
+            }
+            ans = ans * 10 + tmp;
+            x /= 10;
+        }
+        return ans;
     }
 }
