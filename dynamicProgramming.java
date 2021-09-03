@@ -52,4 +52,23 @@ class dynamicProgramming {
         }
         return ans;
     } 
+
+    public int reverseInteger(int x) {
+        int ans = 0;
+        while(x!=0) {
+            //get the last digit
+            int tmp = x%10;
+            //cannot larger than the largest value
+            if (ans>Integer.MAX_VALUE/10 || (ans==Integer.MAX_VALUE/10 && tmp>7)) {
+                return 0;
+            }
+            //cannot smaller than the smallest value
+            if (ans<-Integer.MIN_VALUE/10 || (ans==-Integer.MIN_VALUE/10 && tmp<-8)) {
+                return 0;
+            }
+            ans = ans*10 + tmp;
+            x /= 10;
+        }
+        return ans;
+    }  
 }
