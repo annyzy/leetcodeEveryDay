@@ -55,6 +55,22 @@ class bitManipulation {
     public int reverseInteger(int x) {
         int ans = 0;
         while (x != 0) {
+            /*
+              example: 123 -> 321
+
+                       x = 123
+                       tmp: 123 % 10 = 3
+                       ans: 0 * 10 + 3 = 3
+                       x: 123 / 10 = 12
+
+                       tmp: 12 % 10 = 2
+                       ans: 3 * 10 + 2 = 32
+                       x: 12 / 10 = 1
+
+                       tmp: 1 % 10 = 1
+                       ans: 32 * 10 + 1 =321
+                       x: 1 / 10 = 0
+            */
             // get the last digit
             int tmp = x % 10;
             // cannot larger than the largest value
