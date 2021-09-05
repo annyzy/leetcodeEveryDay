@@ -46,6 +46,7 @@ Integer.MIN_VALUE: -2^31
 Arrays.equal(char[] a, char[] b): Returns true if the two specified arrays of bytes are equal to one another
 Array.sort(char[] a): return type "static void"
 
+toString(): for a object that is already is a string
 Backtracking
 	Keys
 		1. Choice: A decision point in the recursion
