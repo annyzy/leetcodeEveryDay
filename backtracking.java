@@ -56,11 +56,12 @@ class backtracking {
         map.put('8', "tuv");
         map.put('9', "wxyz");
         
-        letterCombinationsHelper(ans, new StringBuffer(), map, digits, 0);
+        StringBuilder str = new StringBuilder();
+        letterCombinationsHelper(ans, str, map, digits, 0);
         return ans;
     }
     
-    public void letterCombinationsHelper(List<String> ans, StringBuffer str, HashMap<Character, String> map, String digits, int i){
+    public void letterCombinationsHelper(List<String> ans, StringBuilder str, HashMap<Character, String> map, String digits, int i){
         /*
                 example: "23"
                            2
@@ -71,6 +72,7 @@ class backtracking {
         */
         //base case
         if (i == digits.length()){
+            //str: ad, ae....
             ans.add(str.toString());
         }else{
             char c = digits.charAt(i);
@@ -78,8 +80,11 @@ class backtracking {
             int count = l.length();
             for(int j = 0; j < count; j++ ){
                 str.append(letters.charAt(j));
+                //i -> i+1: '2'->'3'
+                // 2nd: letterCombinationsHelper({}, {a}, map, "23", 1)
+                // 3rd: letterCombinationsHelper({ad}, {ad}, map, "23", 2) -> to base case: i==2, str={ad}
                 letterCombinationsHelper(ans, str, map, digits, i + 1);
-                //delete d -> ae, e-> af, a-> bd.... to return to the previous state
+                //delete d -> a, e->a, f->a, a->b... to return to the previous state
                 str.deleteCharAt(i);
             }
         }
