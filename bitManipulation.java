@@ -86,4 +86,18 @@ class bitManipulation {
         }
         return ans;
     }
+
+    public int findDuplicate(int[] nums) {
+        HashSet<Integer> ans = new HashSet<Integer>();
+        
+        //edge case
+        if(nums.length==0) return -1;
+        
+        for(int num : nums){
+            if(ans.contains(num)) return num;
+            ans.add(num);
+        }
+        
+        return -1;
+    }
 }
