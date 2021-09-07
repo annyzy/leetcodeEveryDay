@@ -100,4 +100,23 @@ class bitManipulation {
         
         return -1;
     }
+
+    public int[] countBits(int n) {
+        //edge case;
+        if(n < 0) return null;
+        
+        /*
+            0 -> 0  
+            1 -> 1
+            2 -> 10
+            3 -> 11
+            4 -> 100
+            5 -> 101
+        */
+        int[] ans = new int[n+1];
+        for(int i = 0; i <= n; i++)
+            ans[i] = ans[i/2] + i%2;
+        
+        return ans;
+    }
 }
