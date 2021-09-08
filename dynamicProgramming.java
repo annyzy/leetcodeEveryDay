@@ -34,6 +34,7 @@ class dynamicProgramming {
         */
         for(int  j = 0; j < len; j++){
             for (int i = 0; i <= j; i++){
+                //skip the value if the character at i and j position is not the same
                 if(s.charAt(i) != s.charAt(j)) continue;
                 if(i == j || j-i <= 1) {
                     dp[i][j] = true;
@@ -49,4 +50,40 @@ class dynamicProgramming {
         }
         return ans;
     }  
+    public int countPalindromicSubstrings(String s) {
+        //edge case
+        if (s.length() <= 0) return 0;
+        
+        int len = s.length();
+        boolean[][] dp = new boolean[len][len];
+        int ans = 0;
+
+        /*    j 0 1 2 3
+            i   a a b a
+            0 a T T F F
+            1 a F T F T
+            2 b F F T F
+            3 a F F F T
+        */
+        for(int  j = 0; j < len; j++){
+            for (int i = 0; i <= j; i++){
+                //skip the value if the character at i and j position is not the same
+                if(s.charAt(i) != s.charAt(j)) continue;
+                if( i == j ) {
+                    dp[i][j] = true;
+                    ans++;
+                } else if( j-i <=2 ){
+                    //"aa". "aba"
+                    dp[i][j] = true;
+                    ans++;
+                }else if( dp[i+1][j-1] ){
+                    //"axxxxxa", only need to check if xxxxx is palidrome of not
+                    dp[i][j] = true;
+                    ans++;
+                }
+                
+            }
+        }
+        return ans;        
+    }
 }
