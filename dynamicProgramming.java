@@ -28,9 +28,9 @@ class dynamicProgramming {
         /*    j 0 1 2 3
             i   a a b a
             0 a T T F F
-            1 a F T F T
-            2 b F F T F
-            3 a F F F T
+            1 a   T F T
+            2 b     T F
+            3 a       T
         */
         for(int  j = 0; j < len; j++){
             for (int i = 0; i <= j; i++){
@@ -61,9 +61,9 @@ class dynamicProgramming {
         /*    j 0 1 2 3
             i   a a b a
             0 a T T F F
-            1 a F T F T
-            2 b F F T F
-            3 a F F F T
+            1 a   T F T
+            2 b     T F
+            3 a       T
         */
         for(int  j = 0; j < len; j++){
             for (int i = 0; i <= j; i++){
