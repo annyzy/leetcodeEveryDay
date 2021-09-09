@@ -1,5 +1,7 @@
 import java.util.*;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BinaryTree {
     static class TreeNode {
@@ -236,6 +238,22 @@ public class BinaryTree {
         TreeNode root = new TreeNode(nums[mid]);
         root.left = helper3(nums, left, mid - 1);
         root.right = helper3(nums, mid + 1, right);
+        return root;
+    }
+
+    public TreeNode invertTree(TreeNode root) {
+        // edge case
+        if (root == null)
+            return null;
+
+        TreeNode tmp;
+        tmp = root.right;
+        root.right = root.left;
+        root.left = tmp;
+
+        invertTree(root.left);
+        invertTree(root.right);
+
         return root;
     }
 
