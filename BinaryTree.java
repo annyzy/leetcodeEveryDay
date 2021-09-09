@@ -272,6 +272,26 @@ public class BinaryTree {
         return root1;
     }
 
+    int maxDiameter;
+    
+    public int diameterOfBinaryTree(TreeNode root) {
+        if (root == null)
+            return 0;
+        maxDiameter(root);
+        return maxDiameter;
+    }
+
+    public int maxDiameter(TreeNode root) {
+        if (root == null) {
+            return 0;
+        } else {
+            int leftHeight = maxDiameter(root.left);
+            int rightHeight = maxDiameter(root.right);
+            maxDiameter = Math.max(maxDiameter, leftHeight + rightHeight);
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
+    }
+
     public static void main(String args[]) {
         BinaryTree tree1 = new BinaryTree();
         TreeNode root1 = new TreeNode(5);
