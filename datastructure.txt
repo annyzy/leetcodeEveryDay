@@ -52,3 +52,6 @@ Backtracking
 		1. Choice: A decision point in the recursion
 		2. Constraints: cannot do a decision 
 		3. Goal: final result
+
+Sliding Window
+	"start" and "end" for the two edge of the window
