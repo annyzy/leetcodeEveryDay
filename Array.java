@@ -322,4 +322,22 @@ class Array {
 
         return -1;
     }
+
+    //T:O(NlogN)
+    public int findKthLargest(int[] nums, int k) {
+        //edge case
+        if( k<0 || nums.length < 0 ) return -1; 
+
+        Arrays.sort(nums);
+        int len = nums.length;
+        int count = 1;
+        int ans = 0;
+        for(int i = len -1 ; i >= 0 ; i--){
+            ans = nums[i];
+            if(count == k) return nums[i];  
+            count ++;    
+            ans = nums[i-1];
+        }
+        return ans;
+    }
 }
