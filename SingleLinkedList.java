@@ -4,7 +4,7 @@ public class SingleLinkedList {
 
 	class ListNode {
 		int val;
-		ListNode next;
+		ListNode next, random;
 
 		public ListNode() {
 		}
@@ -17,6 +17,7 @@ public class SingleLinkedList {
 		public ListNode(int val, ListNode next) {
 			this.val = val;
 			this.next = next;
+			this.random = random;
 		}
 	}
 
@@ -337,6 +338,28 @@ public class SingleLinkedList {
 		// cut the lists into half
 		slowPrev.next = null;
 		return mid;
+	}
+
+	public ListNode copyRandomList(ListNode head) {
+		if (head == null)
+			return null;
+
+		ListNode curr = head;
+		Map<ListNode, ListNode> map = new HashMap<>();
+
+		while (curr != null) {
+			map.put(curr, new ListNode(curr.val));
+			curr = curr.next;
+		}
+
+		curr = head;
+		while (curr != null) {
+			map.get(curr).next = map.get(curr.next);
+			map.get(curr).random = map.get(curr.random);
+			curr = curr.next;
+		}
+
+		return map.get(head);
 	}
 
 	public static void main(String[] args) {
