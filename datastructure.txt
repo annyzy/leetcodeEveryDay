@@ -55,3 +55,6 @@ Backtracking
 
 Sliding Window
 	"start" and "end" for the two edge of the window
+
+Hashmap
+	contains: T O(1)
