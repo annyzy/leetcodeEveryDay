@@ -340,4 +340,26 @@ class Array {
         }
         return ans;
     }
+
+    public int[][] mergeIntervals(int[][] intervals) {
+        //sort the intervals in asecending order by comparing each first value
+        Arrays.sort(intervals, (a,b) -> Integer.compare(a[0], b[0]));
+        
+        //creat a arraylist to store the final answer
+        LinkedList<int []> ans = new LinkedList<>();
+        //put in the first interval(sorted)
+        ans.add(intervals[0]);
+        
+        for(int[] interval: intervals){
+            //add the interval to the answer linkedlist if the current interval start point is bigger than the last interval's end point in the list
+            if(ans.getLast()[1] < interval[0]){
+                ans.add(interval);
+            }else{
+                //update the end point of the last interval in the list
+                ans.getLast()[1] = Math.max(ans.getLast()[1], interval[1]);
+            }
+        }
+        
+        return ans.toArray(new int[ans.size()][]);
+    }
 }
