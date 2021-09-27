@@ -362,4 +362,20 @@ class Array {
         
         return ans.toArray(new int[ans.size()][]);
     }
+
+    public int subarraySum(int[] nums, int k) {
+        //edge case
+        if(nums==null || nums.length < 1) return 0;
+        
+        int count = 0;
+        for(int i = 0; i < nums.length; i++){
+            int sum = 0;
+            for(int j = i; j < nums.length; j ++){
+                sum = sum + nums[j];
+                if(sum == k) count++;
+            }
+        }
+        
+        return count;
+    }
 }
