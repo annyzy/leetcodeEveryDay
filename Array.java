@@ -17,6 +17,36 @@ class Array {
         return null;
     }
 
+    public List<List<Integer>> threeSum(int[] nums) {
+
+        // edge cases
+        List<List<Integer>> ans = new ArrayList<>();
+
+        if (nums == null || nums.length < 3) {
+            return ans;
+        }
+
+        Arrays.sort(nums);
+
+        HashMap<Integer, Integer> map1 = new HashMap<>();
+        HashMap<Integer, Integer> map2 = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int remain1 = 0 - nums[i];
+            if (map1.containsKey(nums[i]))
+                break;
+            for (int j = i + 1; j < nums.length; j++) {
+                int remain2 = remain1 - nums[j];
+                if (map2.containsKey(remain2))
+                    ans.add(Arrays.asList(nums[i], nums[j], remain2));
+                map2.put(nums[j], j);
+            }
+            map1.put(nums[i], i);
+        }
+
+        return ans;
+    }
+
     public int maxSubArray(int[] nums) {
         if (nums == null || nums.length == 0)
             return 0;
