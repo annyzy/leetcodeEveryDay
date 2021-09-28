@@ -17,31 +17,59 @@ class Array {
         return null;
     }
 
+    // T: O(n^2), O(n) in the "for loop" and O(n) within the "for loop" for "while loop"
     public List<List<Integer>> threeSum(int[] nums) {
-
-        // edge cases
+        int len = nums.length;
         List<List<Integer>> ans = new ArrayList<>();
 
-        if (nums == null || nums.length < 3) {
+        // edge cases
+        if (nums == null || len < 3) {
             return ans;
         }
 
         Arrays.sort(nums);
 
-        HashMap<Integer, Integer> map1 = new HashMap<>();
-        HashMap<Integer, Integer> map2 = new HashMap<>();
-
-        for (int i = 0; i < nums.length; i++) {
-            int remain1 = 0 - nums[i];
-            if (map1.containsKey(nums[i]))
+        for (int i = 0; i < len; i++) {
+            // if the first element in the sorted array is greater than 0, then no answer
+            if (nums[i] > 0)
                 break;
-            for (int j = i + 1; j < nums.length; j++) {
-                int remain2 = remain1 - nums[j];
-                if (map2.containsKey(remain2))
-                    ans.add(Arrays.asList(nums[i], nums[j], remain2));
-                map2.put(nums[j], j);
+
+            // skip the element if duplicate, ensure that the l points starts from index 1
+            /*
+             * example: [-2, -2, 2, 2] 
+             * i = 0: nums[i]==nums[i+1]: nums[0] = -2, nums[1] = -2 -> continue
+             *        i > 0 && nums[i-1] == nums[i]: go -> l = 1
+             * 
+             * i = 1: nums[i]==nums[i+1]: nums[1] = -2, nums[2] = 2 -> go -> l = 2
+             *        i > 0 && nums[i-1] == nums[i]: nums[0] = -2, nums[1] = -2 -> continue
+             * 
+             * i = 2: nums[i]==nums[i+1]: nums[2] = 2, nums[3] = 2 -> continue
+             *        i > 0 && nums[i-1] == nums[i]: nums[1] = -2, nums[2] = 2 -> go
+             * 
+             * i = 3: nums[i]==nums[i+1]: nothing
+             *        i > 0 && nums[i-1] == nums[i]: nums[2] = 2, nums[3] = 2 -> continue
+             */
+
+            if (i > 0 && nums[i - 1] == nums[i])
+                continue;
+
+            int l = i + 1, r = len - 1;
+
+            while (l < r) {
+                int sum = nums[i] + nums[l] + nums[r];
+
+                if (sum < 0) l++;
+                if (sum == 0) {
+                    ans.add(Arrays.asList(nums[i], nums[l], nums[r]));
+                    //skip duplicate
+                    while (l < r && nums[l] == nums[l + 1]) l++;
+                    l++;
+                    //skip duplicate
+                    while (l < r && nums[r] == nums[r - 1]) r--;
+                    r--;
+                }
+                if (sum > 0) r--;
             }
-            map1.put(nums[i], i);
         }
 
         return ans;
