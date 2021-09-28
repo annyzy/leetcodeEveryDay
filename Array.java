@@ -1,6 +1,22 @@
 import java.util.*;
 
 class Array {
+    public int[] twoSum(int[] nums, int target) {
+        // edge case
+        if (nums == null || nums.length < 2)
+            return null;
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int remain = target - nums[i];
+            if (map.containsKey(remain))
+                return new int[] { i, map.get(remain) };
+            map.put(nums[i], i);
+        }
+
+        return null;
+    }
+
     public int maxSubArray(int[] nums) {
         if (nums == null || nums.length == 0)
             return 0;
@@ -303,15 +319,15 @@ class Array {
         if (s.isEmpty())
             return -1;
 
-        //requir contain only lower cases
+        // requir contain only lower cases
         for (char c : s.toCharArray()) {
             if (!Character.isLowerCase(c))
-                    return -1;
+                return -1;
         }
         int[] arr = new int[26];
         for (int i = 0; i < s.length(); i++) {
-            //counts up the number of occurrences of each letter in s
-            //-'a': "shifts" the ascii/unicode value so that A - Z have values 0 - 25. 
+            // counts up the number of occurrences of each letter in s
+            // -'a': "shifts" the ascii/unicode value so that A - Z have values 0 - 25.
             arr[s.charAt(i) - 'a']++;
         }
         for (int i = 0; i < s.length(); i++) {
@@ -323,59 +339,64 @@ class Array {
         return -1;
     }
 
-    //T:O(NlogN)
+    // T:O(NlogN)
     public int findKthLargest(int[] nums, int k) {
-        //edge case
-        if( k<0 || nums.length < 0 ) return -1; 
+        // edge case
+        if (k < 0 || nums.length < 0)
+            return -1;
 
         Arrays.sort(nums);
         int len = nums.length;
         int count = 1;
         int ans = 0;
-        for(int i = len -1 ; i >= 0 ; i--){
+        for (int i = len - 1; i >= 0; i--) {
             ans = nums[i];
-            if(count == k) return nums[i];  
-            count ++;    
-            ans = nums[i-1];
+            if (count == k)
+                return nums[i];
+            count++;
+            ans = nums[i - 1];
         }
         return ans;
     }
 
     public int[][] mergeIntervals(int[][] intervals) {
-        //sort the intervals in asecending order by comparing each first value
-        Arrays.sort(intervals, (a,b) -> Integer.compare(a[0], b[0]));
-        
-        //creat a arraylist to store the final answer
-        LinkedList<int []> ans = new LinkedList<>();
-        //put in the first interval(sorted)
+        // sort the intervals in asecending order by comparing each first value
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+
+        // creat a arraylist to store the final answer
+        LinkedList<int[]> ans = new LinkedList<>();
+        // put in the first interval(sorted)
         ans.add(intervals[0]);
-        
-        for(int[] interval: intervals){
-            //add the interval to the answer linkedlist if the current interval start point is bigger than the last interval's end point in the list
-            if(ans.getLast()[1] < interval[0]){
+
+        for (int[] interval : intervals) {
+            // add the interval to the answer linkedlist if the current interval start point
+            // is bigger than the last interval's end point in the list
+            if (ans.getLast()[1] < interval[0]) {
                 ans.add(interval);
-            }else{
-                //update the end point of the last interval in the list
+            } else {
+                // update the end point of the last interval in the list
                 ans.getLast()[1] = Math.max(ans.getLast()[1], interval[1]);
             }
         }
-        
+
         return ans.toArray(new int[ans.size()][]);
     }
 
     public int subarraySum(int[] nums, int k) {
-        //edge case
-        if(nums==null || nums.length < 1) return 0;
-        
+        // edge case
+        if (nums == null || nums.length < 1)
+            return 0;
+
         int count = 0;
-        for(int i = 0; i < nums.length; i++){
+        for (int i = 0; i < nums.length; i++) {
             int sum = 0;
-            for(int j = i; j < nums.length; j ++){
+            for (int j = i; j < nums.length; j++) {
                 sum = sum + nums[j];
-                if(sum == k) count++;
+                if (sum == k)
+                    count++;
             }
         }
-        
+
         return count;
     }
 }
