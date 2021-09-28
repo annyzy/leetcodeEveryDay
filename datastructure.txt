@@ -43,8 +43,11 @@ Integer.MAX_VALUE: 2^31 - 1
 
 Integer.MIN_VALUE: -2^31
 
-Arrays.equal(char[] a, char[] b): Returns true if the two specified arrays of bytes are equal to one another
-Array.sort(char[] a): return type "static void"
+Arrays
+	Arrays.equal(char[] a, char[] b): Returns true if the two specified arrays of bytes are equal to one another
+	Arrays.sort(char[] a): return type "static void"
+	Arrays.asList(T...a): static <T> List<T>
+		return a fixed-size list backed by the specified array.  
 
 toString(): for a object that is already is a string
 Backtracking
