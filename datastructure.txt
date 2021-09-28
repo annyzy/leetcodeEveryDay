@@ -58,3 +58,7 @@ Sliding Window
 
 Hashmap
 	contains: T O(1)
+
+Difference between break and continue
+	break: end the loop immediately
+	continue: skip the current iteration of the loop
