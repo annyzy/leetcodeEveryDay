@@ -1,4 +1,7 @@
 import java.util.*;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 class Array {
     public int[] twoSum(int[] nums, int target) {
@@ -456,5 +459,32 @@ class Array {
         }
 
         return count;
+    }
+
+    public List<List<String>> groupAnagrams (String[] strs){
+        //edge case
+        if(strs.length == 0){
+            return new ArrayList<>();
+        }
+
+        Map<String, List<String>> map = new HashMap<String, List<String>>();
+        for(String str: strs){
+            //convert current string to a character array
+            char[] c = str.toCharArray();
+            Arrays.sort(c);
+            //return the sorted character array to a new string
+            String newStr = String.valueOf(c);
+
+            //only put the current sorted string into the map if it is not presented in the map
+            if(!map.containsKey(newStr)){
+                map.put(newStr, new ArrayList<>());
+            }
+
+            //add the current str to the list that maps the newStr
+            map.get(newStr).add(str);
+        }
+
+        //get a collection view of the map values;    
+        return new ArrayList(map.values()) ;
     }
 }
