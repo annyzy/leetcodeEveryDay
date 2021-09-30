@@ -50,9 +50,9 @@ Arrays
 		return a fixed-size list backed by the specified array.  
 
 Strings
-	toCharArray(): converts s string into a sequence of characters.
-		return array length == string length
-	toString(): for a object that is already is a string
+	toCharArray(): Converts this string to a new character array
+	toString(): This object (which is already a string) is itself return.
+        valueOf(char c): Returns the string representation of the char argument 
 
 Backtracking
 	Keys
