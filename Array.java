@@ -467,6 +467,7 @@ class Array {
             return new ArrayList<>();
         }
 
+        //instead of raw type: Map<String, List> ans = new HashMap<String, List>();
         Map<String, List<String>> map = new HashMap<String, List<String>>();
         for(String str: strs){
             //convert current string to a character array
