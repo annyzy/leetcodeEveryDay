@@ -49,7 +49,11 @@ Arrays
 	Arrays.asList(T...a): static <T> List<T>
 		return a fixed-size list backed by the specified array.  
 
-toString(): for a object that is already is a string
+Strings
+	toCharArray(): converts s string into a sequence of characters.
+		return array length == string length
+	toString(): for a object that is already is a string
+
 Backtracking
 	Keys
 		1. Choice: A decision point in the recursion
