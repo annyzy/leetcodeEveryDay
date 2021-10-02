@@ -20,7 +20,8 @@ class Array {
         return null;
     }
 
-    // T: O(n^2), O(n) in the "for loop" and O(n) within the "for loop" for "while loop"
+    // T: O(n^2), O(n) in the "for loop" and O(n) within the "for loop" for "while
+    // loop"
     public List<List<Integer>> threeSum(int[] nums) {
         int len = nums.length;
         List<List<Integer>> ans = new ArrayList<>();
@@ -39,18 +40,17 @@ class Array {
 
             // skip the element if duplicate, ensure that the l points starts from index 1
             /*
-             * example: [-2, -2, 2, 2] 
-             * i = 0: nums[i]==nums[i+1]: nums[0] = -2, nums[1] = -2 -> continue
-             *        i > 0 && nums[i-1] == nums[i]: go -> l = 1
+             * example: [-2, -2, 2, 2] i = 0: nums[i]==nums[i+1]: nums[0] = -2, nums[1] = -2
+             * -> continue i > 0 && nums[i-1] == nums[i]: go -> l = 1
              * 
-             * i = 1: nums[i]==nums[i+1]: nums[1] = -2, nums[2] = 2 -> go -> l = 2
-             *        i > 0 && nums[i-1] == nums[i]: nums[0] = -2, nums[1] = -2 -> continue
+             * i = 1: nums[i]==nums[i+1]: nums[1] = -2, nums[2] = 2 -> go -> l = 2 i > 0 &&
+             * nums[i-1] == nums[i]: nums[0] = -2, nums[1] = -2 -> continue
              * 
-             * i = 2: nums[i]==nums[i+1]: nums[2] = 2, nums[3] = 2 -> continue
-             *        i > 0 && nums[i-1] == nums[i]: nums[1] = -2, nums[2] = 2 -> go
+             * i = 2: nums[i]==nums[i+1]: nums[2] = 2, nums[3] = 2 -> continue i > 0 &&
+             * nums[i-1] == nums[i]: nums[1] = -2, nums[2] = 2 -> go
              * 
-             * i = 3: nums[i]==nums[i+1]: nothing
-             *        i > 0 && nums[i-1] == nums[i]: nums[2] = 2, nums[3] = 2 -> continue
+             * i = 3: nums[i]==nums[i+1]: nothing i > 0 && nums[i-1] == nums[i]: nums[2] =
+             * 2, nums[3] = 2 -> continue
              */
 
             if (i > 0 && nums[i - 1] == nums[i])
@@ -61,17 +61,21 @@ class Array {
             while (l < r) {
                 int sum = nums[i] + nums[l] + nums[r];
 
-                if (sum < 0) l++;
+                if (sum < 0)
+                    l++;
                 if (sum == 0) {
                     ans.add(Arrays.asList(nums[i], nums[l], nums[r]));
-                    //skip duplicate
-                    while (l < r && nums[l] == nums[l + 1]) l++;
+                    // skip duplicate
+                    while (l < r && nums[l] == nums[l + 1])
+                        l++;
                     l++;
-                    //skip duplicate
-                    while (l < r && nums[r] == nums[r - 1]) r--;
+                    // skip duplicate
+                    while (l < r && nums[r] == nums[r - 1])
+                        r--;
                     r--;
                 }
-                if (sum > 0) r--;
+                if (sum > 0)
+                    r--;
             }
         }
 
@@ -461,31 +465,61 @@ class Array {
         return count;
     }
 
-    public List<List<String>> groupAnagrams (String[] strs){
-        //edge case
-        if(strs.length == 0){
+    public List<List<String>> groupAnagrams(String[] strs) {
+        // edge case
+        if (strs.length == 0) {
             return new ArrayList<>();
         }
 
-        //instead of raw type: Map<String, List> ans = new HashMap<String, List>();
+        // instead of raw type: Map<String, List> ans = new HashMap<String, List>();
         Map<String, List<String>> map = new HashMap<String, List<String>>();
-        for(String str: strs){
-            //convert current string to a character array
+        for (String str : strs) {
+            // convert current string to a character array
             char[] c = str.toCharArray();
             Arrays.sort(c);
-            //return the sorted character array to a new string
+            // return the sorted character array to a new string
             String newStr = String.valueOf(c);
 
-            //only put the current sorted string into the map if it is not presented in the map
-            if(!map.containsKey(newStr)){
+            // only put the current sorted string into the map if it is not presented in the
+            // map
+            if (!map.containsKey(newStr)) {
                 map.put(newStr, new ArrayList<>());
             }
 
-            //add the current str to the list that maps the newStr
+            // add the current str to the list that maps the newStr
             map.get(newStr).add(str);
         }
 
-        //get a collection view of the map values;    
-        return new ArrayList(map.values()) ;
+        // get a collection view of the map values;
+        return new ArrayList(map.values());
+    }
+
+    public void nextPermutation(int[] nums) {
+        int len = nums.length;
+        // edge case
+        if (nums == null || len < 1)
+            return;
+
+        // example: [1,2,3,4,6,5]
+        for (int i = len - 1; i > 0; i--) {
+            // find 6 > 4
+            if (nums[i] > nums[i - 1]) {
+                for (int j = len - 1; j >= i; j--) {
+                    // find 5>4, then wap 4 and 5
+                    if (nums[j] > nums[i - 1]) {
+                        int k = nums[i - 1];
+                        nums[i - 1] = nums[j];
+                        nums[j] = k;
+                        break;
+                    }
+                }
+                // now the number becomes 123564, then sort the number after 5 to ascending
+                // order
+                Arrays.sort(nums, i, len);
+                return;
+            }
+        }
+        // special case if such arrangment is impossible
+        Arrays.sort(nums);
     }
 }
