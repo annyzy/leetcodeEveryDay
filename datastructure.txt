@@ -51,8 +51,9 @@ Arrays
 
 Strings
 	toCharArray(): Converts this string to a new character array
-	toString(): This object (which is already a string) is itself return.
-        valueOf(char c): Returns the string representation of the char argument 
+	toString(): This object (which is already a string) is itself return
+	valueOf(char c): Returns the string representation of the char argument 
+	values(): Return a Collection view of the values contained in this map
 
 Backtracking
 	Keys
@@ -63,9 +64,13 @@ Backtracking
 Sliding Window
 	"start" and "end" for the two edge of the window
 
-Hashmap
+HashMap
 	contains: T O(1)
+	get(): Returns the value to which the specified key is mapped, or null if no mapping
 
 Difference between break and continue
 	break: end the loop immediately
 	continue: skip the current iteration of the loop
+
+Binary Search
+	cut the elements is half, if target==mid elements, return; else, recursively search in the first half and second half.
