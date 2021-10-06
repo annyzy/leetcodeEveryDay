@@ -108,4 +108,53 @@ class dynamicProgramming {
         
         return dp[len];
     }
+
+    public int coinChange(int[] coins, int amount){
+        //edge case
+        if(coins.length < 0 || amount < 0) return -1;
+
+        //create an array to hold how many mins coins need to used in each iterations
+        int[] dp = new int[amount + 1];
+        //initialize the array to a value cannot be reach
+        Arrays.fill(dp, amount +1);
+        dp[0] = 0;
+
+        /*
+          example: coins = [1,2,5], amount = 4
+                dp = [0,5,5,5,5]
+            i=1  1=1(dp[1]=1) dp[1]=5 dp[0]+1= 1
+                dp = [0,1,5,5,5]   
+                 1<2(skip)     
+                 1<5(skip)
+            i=2  2>1(dp[2] =2) dp[2]=5 dp[1]+1=2
+                dp = [0,1,2,5,5]   
+                 2=2(dp[2] = 1)dp[2]=2 dp[0]+1=1
+                dp = [0,1,1,5,5]
+                 2<5(skip)
+            i=3  3>1(dp[3] = 2)dp[3]=5 dp[2]+1=2
+                dp = [0,1,1,2,5]
+                 3>2(dp[3] = 2)dp[3]=2 dp[1]+1=2
+                dp = [0,1,1,2,5]
+                 3<5(skip)
+            i=4  4>1(dp[4] = 3)dp[4]=5 dp[3]+1=3
+                dp = [0,1,1,2,3]
+                 4>2(dp[4] = 3)dp[4]=3 dp[2]+1=2
+                dp = [0,1,1,2,2]
+                 4<5(skip)
+        */
+        for(int i  = 1; i <= amount; i++){
+            for(int coin : coins){
+                //reduce redundant calculations
+                if(i-coin < 0) continue;
+                dp[i]= Math.min(dp[i], dp[i-coin]+1);
+            }
+        }
+
+        //after all iterations, cannot find the change for that amount
+        if(dp[amount] == amount +1){
+            return -1;
+        }else{
+            return dp[amount];
+        }
+    }
 }
