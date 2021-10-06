@@ -74,3 +74,6 @@ Difference between break and continue
 
 Binary Search
 	cut the elements is half, if target==mid elements, return; else, recursively search in the first half and second half.
+
+Dynamic Programming
+	Top down appraoch
