@@ -522,4 +522,30 @@ class Array {
         // special case if such arrangment is impossible
         Arrays.sort(nums);
     }
+
+    public void rotate(int[][] matrix) {
+        //edge case
+        if(matrix.length <0) return;
+        
+        int row = matrix.length;
+        int col = matrix[0].length;
+        
+        //transpose
+        for(int i  = 0; i < row; i ++){
+            for(int j = i; j < col; j++){
+                int temp = matrix[j][i];
+                matrix[j][i] = matrix[i][j];
+                matrix[i][j] = temp;
+            }
+        }
+        
+        //reflect
+        for(int i  = 0; i < row; i ++){
+            for(int j = 0; j < col/2; j++){
+                int curr = matrix[i][j];
+                matrix[i][j] = matrix[i][row-j-1];
+                matrix[i][row-j-1] = curr;
+            }
+        }
+    }
 }
