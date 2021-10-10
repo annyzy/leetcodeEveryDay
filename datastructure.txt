@@ -4,6 +4,9 @@ Binary Tree
 			Tree is also a graph, an acyclic connected graph
 	Height
 		the largest # of edges in a path from a leaf node to a target node 
+	Depth
+		Start from root, root node has depth 0;
+		Then the child of root node has depth 1, and so on;
 	Balanced Binary Tree
 		the left and right subtrees of every node differ in height by no more 			     
                 than 1
