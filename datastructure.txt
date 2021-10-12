@@ -80,3 +80,10 @@ Binary Search
 
 Dynamic Programming
 	Top down appraoch
+
+Heap
+	tree-based data structure, an almost complete tree
+	max heap: for any given node C, if P is a parent node of C, then the value of P >= C; min heap vice versa
+	Priority Queue: implemented by heap
+			the highest/lowest priority element is always stored as a root, but itself is not a sorted structure
+			good for repeatedly remove the object with the highest.
