@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.Set;
 
-class HashSet{
+class Hashset{
     public int longestConsecutive(int[] nums) {
         //edge case
         if(nums.length == 0) return 0;
