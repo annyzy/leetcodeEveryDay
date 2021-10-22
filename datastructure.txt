@@ -13,7 +13,11 @@ Binary Tree
 	Recursive Approach
 		Policy #1: What need to happen just in "Single Node"
 		Policy #2: Base Case
-		
+
+Trie(prefix tree)
+	A variant of n-ary tree(each node has no more than n children) in which characters are stored at each node. Each path down the tree may represent a word. 
+	A node in a trie could have anywhere from 1 through ALPHABET_SIZE + 1. 
+	
 Least Recently Used (LRU) cache
 	Data Structure Implementations:
 		1. Queue, suing a double linked list. 
