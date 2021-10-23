@@ -200,12 +200,15 @@ public class BinaryTree {
         return isValidBST(root.right);
     }
 
+    //T: O(n)
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode a, TreeNode b) {
+        //edge case
         if (root == null) {
             return null;
         }
 
-        if ((root == a || root == b) || (root == a && root == b)) {
+        //base case
+        if ( root == a || root == b ) {
             System.out.println("Lowest common ancestor of Node " + a.val + " and Node " + b.val + " is " + root.val);
             return root;
         }
@@ -213,16 +216,21 @@ public class BinaryTree {
         TreeNode leftSearchTree = lowestCommonAncestor(root.left, a, b);
         TreeNode rightSearchTree = lowestCommonAncestor(root.right, a, b);
 
-        if (leftSearchTree == null && rightSearchTree == null) {
-            return null;
+        //both left and right found and return
+        if (leftSearchTree != null && rightSearchTree != null) {
+            return root;
         }
+        //left return null, found on right
         if (leftSearchTree == null) {
             return rightSearchTree;
         }
+        //right return null, found on left
         if (rightSearchTree == null) {
             return leftSearchTree;
         }
-        return root;
+
+        //neither found
+        return null;
     }
 
     public TreeNode sortedArrayToBST(int[] nums) {
