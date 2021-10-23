@@ -18,6 +18,10 @@ Trie(prefix tree)
 	A variant of n-ary tree(each node has no more than n children) in which characters are stored at each node. Each path down the tree may represent a word. 
 	A node in a trie could have anywhere from 1 through ALPHABET_SIZE + 1. 
 	
+Cache
+	Store date to speed up the same future requests
+		may be a previous computation or a redundant copy of date
+
 Least Recently Used (LRU) cache
 	Data Structure Implementations:
 		1. Queue, suing a double linked list. 
