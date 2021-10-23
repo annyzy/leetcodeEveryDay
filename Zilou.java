@@ -68,4 +68,35 @@ class Zilou {
 
         return dp[m - 1][n - 1];
     }
+
+    //Time: O(n)
+    public static int calLen(String s){
+        if(s.equals("")) return 0;
+        return calLen(s.substring(1))+1;
+    }
+
+    //Time: O(n)
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        //edge case
+        if(root == null) return null;
+        
+        //base case
+        if( p==root || q==root ){
+            return root;
+        }
+        
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        
+        if(left != null && right != null) return root;
+        
+        if(left == null) return right;
+        if(right == null) return left;
+        
+        return null;
+    }
+    public static void main(String args[]) {
+        String s ="abc";
+        System.out.println(calLen(s));
+    }
 }
