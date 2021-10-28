@@ -102,7 +102,8 @@ class Zilou {
     }
 
     int[] value = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
-    String[] symbol = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};    
+    String[] symbol = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"}; 
+    //T:O(n)   
     public String intToRoman(int num) {
         //edge case
         if(num < 1) return null;
@@ -117,8 +118,38 @@ class Zilou {
         }
         return ans.toString();
     }
+
+    //T:O(n)
+    public int romanToInt(String s) {
+        //edge case
+        if(s.length() == 0) return 0;
+        
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+        
+        int prev = map.get(s.charAt(0)), ans = 0, len = s.length();
+        for(int i = 1; i < len; i++){
+            int num = map.get(s.charAt(i));
+            if(prev < num) {
+                ans -= prev;
+            }else{
+                ans += prev;
+            }
+            prev = num;
+        }
+        return ans += prev;     
+    }
+
     public static void main(String args[]) {
         String s = "abc";
         System.out.println(calLen(s));
     }
+
 }
