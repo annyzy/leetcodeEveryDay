@@ -25,4 +25,36 @@ class Hashmap {
         Arrays.sort(n, (x,y)->y[1]-x[1]);
         return null;
     }
+
+    public int romanToInt(String s) {
+        // edge case
+        if (s.isEmpty())
+            return 0;
+
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+
+        int len = s.length();
+        int ans = 0;
+        int prev = map.get(s.charAt(0));
+        for (int i = 1; i < len; i++) {
+            int num = map.get(s.charAt(i));
+            // such as: IV=5-1
+            if (prev < num) {
+                ans = ans - prev;
+                // such as: VI = 5+1
+            } else {
+                ans = ans + prev;
+            }
+            prev = num;
+        }
+        ans = ans + prev;
+        return ans;
+    }
 }
