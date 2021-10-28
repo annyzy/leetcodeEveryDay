@@ -69,34 +69,56 @@ class Zilou {
         return dp[m - 1][n - 1];
     }
 
-    //Time: O(n)
-    public static int calLen(String s){
-        if(s.equals("")) return 0;
-        return calLen(s.substring(1))+1;
+    // Time: O(n)
+    public static int calLen(String s) {
+        if (s.equals(""))
+            return 0;
+        return calLen(s.substring(1)) + 1;
     }
 
-    //Time: O(n)
+    // Time: O(n)
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        //edge case
-        if(root == null) return null;
-        
-        //base case
-        if( p==root || q==root ){
+        // edge case
+        if (root == null)
+            return null;
+
+        // base case
+        if (p == root || q == root) {
             return root;
         }
-        
+
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         TreeNode right = lowestCommonAncestor(root.right, p, q);
-        
-        if(left != null && right != null) return root;
-        
-        if(left == null) return right;
-        if(right == null) return left;
-        
+
+        if (left != null && right != null)
+            return root;
+
+        if (left == null)
+            return right;
+        if (right == null)
+            return left;
+
         return null;
     }
+
+    int[] value = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
+    String[] symbol = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};    
+    public String intToRoman(int num) {
+        //edge case
+        if(num < 1) return null;
+    
+        StringBuilder ans = new StringBuilder();
+    
+        for(int i = 0; i< value.length;i++){
+            while (value[i] <= num){
+                num = num - value[i];
+                ans.append(symbol[i]);
+            }
+        }
+        return ans.toString();
+    }
     public static void main(String args[]) {
-        String s ="abc";
+        String s = "abc";
         System.out.println(calLen(s));
     }
 }
