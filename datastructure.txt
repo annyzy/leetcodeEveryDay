@@ -73,7 +73,12 @@ Backtracking
 		3. Goal: final result
 
 Sliding Window
-	"start" and "end" for the two edge of the window
+	"start" and "end" two pointers for the two edge of the window
+	two while loops: 
+		1st: check if the right pointer move out of current bound, new position new update(increase value)
+		2nd: inside 1st one, move the left pointer to right to the [left, right] sliding window. new position new update(increase)
+	find a good [left, right], update res = max[res, current window length]
+	move the right pointer to right, explore new window
 
 HashMap
 	contains: T O(1)
@@ -87,7 +92,7 @@ Binary Search
 	cut the elements is half, if target==mid elements, return; else, recursively search in the first half and second half.
 
 Dynamic Programming
-	Top down appraoch
+	Top down approach
 
 Heap
 	tree-based data structure, an almost complete tree
@@ -95,3 +100,5 @@ Heap
 	Priority Queue: implemented by heap
 			the highest/lowest priority element is always stored as a root, but itself is not a sorted structure
 			good for repeatedly remove the object with the highest.
+
+
