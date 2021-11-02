@@ -150,15 +150,15 @@ class Zilou {
         return ans += prev;
     }
 
-    //T: O(n)
+    // T: O(n)
     public int longestOnes(int[] nums, int k) {
-        int n = nums.length, res = 0, left = 0, right = 0, zeros = 0;
+        int len = nums.length, res = 0, left = 0, right = 0, zeros = 0;
 
         // edge case
-        if (nums.length < 1)
+        if (len < 1)
             return 0;
 
-        while (right < n) {
+        while (right < len) {
             if (nums[right] == 0)
                 zeros++;
             while (zeros > k) {
@@ -168,6 +168,31 @@ class Zilou {
             }
 
             res = Math.max(res, right - left + 1);
+            right++;
+        }
+
+        return res;
+    }
+
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int len = nums.length, left = 0, right = 0, res = 0, zeros = 0;
+
+        // edge case
+        if (len < 1)
+            return 0;
+
+        while (right < len) {
+            if (nums[right] == 0)
+                zeros++;
+
+            while (zeros == 2) {
+                if (nums[left] == 0)
+                    zeros--;
+                left++;
+            }
+
+            res = Math.max(res, right - left + 1);
+
             right++;
         }
 
