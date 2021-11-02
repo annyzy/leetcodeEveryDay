@@ -101,17 +101,19 @@ class Zilou {
         return null;
     }
 
-    int[] value = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
-    String[] symbol = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"}; 
-    //T:O(n)   
+    int[] value = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+    String[] symbol = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+
+    // T:O(n)
     public String intToRoman(int num) {
-        //edge case
-        if(num < 1) return null;
-    
+        // edge case
+        if (num < 1)
+            return null;
+
         StringBuilder ans = new StringBuilder();
-    
-        for(int i = 0; i< value.length;i++){
-            while (value[i] <= num){
+
+        for (int i = 0; i < value.length; i++) {
+            while (value[i] <= num) {
                 num = num - value[i];
                 ans.append(symbol[i]);
             }
@@ -119,13 +121,14 @@ class Zilou {
         return ans.toString();
     }
 
-    //T:O(n)
+    // T:O(n)
     public int romanToInt(String s) {
-        //edge case
-        if(s.length() == 0) return 0;
-        
+        // edge case
+        if (s.length() == 0)
+            return 0;
+
         HashMap<Character, Integer> map = new HashMap<Character, Integer>();
-        
+
         map.put('I', 1);
         map.put('V', 5);
         map.put('X', 10);
@@ -133,18 +136,42 @@ class Zilou {
         map.put('C', 100);
         map.put('D', 500);
         map.put('M', 1000);
-        
+
         int prev = map.get(s.charAt(0)), ans = 0, len = s.length();
-        for(int i = 1; i < len; i++){
+        for (int i = 1; i < len; i++) {
             int num = map.get(s.charAt(i));
-            if(prev < num) {
+            if (prev < num) {
                 ans -= prev;
-            }else{
+            } else {
                 ans += prev;
             }
             prev = num;
         }
-        return ans += prev;     
+        return ans += prev;
+    }
+
+    //T: O(n)
+    public int longestOnes(int[] nums, int k) {
+        int n = nums.length, res = 0, left = 0, right = 0, zeros = 0;
+
+        // edge case
+        if (nums.length < 1)
+            return 0;
+
+        while (right < n) {
+            if (nums[right] == 0)
+                zeros++;
+            while (zeros > k) {
+                if (nums[left] == 0)
+                    zeros--;
+                left++;
+            }
+
+            res = Math.max(res, right - left + 1);
+            right++;
+        }
+
+        return res;
     }
 
     public static void main(String args[]) {
