@@ -88,7 +88,7 @@ Difference between break and continue
 	break: end the loop immediately
 	continue: skip the current iteration of the loop
 
-Binary Search
+Binary Search O(log(n))
 	cut the elements is half, if target==mid elements, return; else, recursively search in the first half and second half.
 
 Dynamic Programming
