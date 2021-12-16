@@ -52,8 +52,8 @@ class Heap {
 
             // reconnect the list in the right order
             ListNode next = curr.next;
-            prev.next = curr;
             curr.next = prev.next;
+            prev.next = curr;
 
             // sort the iteration of the next target
             curr = next;
