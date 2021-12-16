@@ -100,5 +100,13 @@ Heap
 	Priority Queue: implemented by heap
 			the highest/lowest priority element is always stored as a root, but itself is not a sorted structure
 			good for repeatedly remove the object with the highest.
+	Example:
+		Tree Representation
+						100
+				19				36
+			17		3		25		1
+		2		7
+		Array Representation
+		100 19 36 17 3 25 1 2 7
 
 
