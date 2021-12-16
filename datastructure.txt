@@ -109,4 +109,9 @@ Heap
 		Array Representation
 		100 19 36 17 3 25 1 2 7
 
+class Collections
+	this class consists exclusively of static methods that operate or return collections.
+	Collections.sort(List<T> list)
+		sort the specified list into ascending order, according to the natural ordering(type) of its elements
+
 
