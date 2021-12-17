@@ -108,6 +108,8 @@ Heap
 		2		7
 		Array Representation
 		100 19 36 17 3 25 1 2 7
+	Priority Queue
+		PirorityQueue<Type> pq = new PirorityQueue(size, (a, b) -> a-b) : sort in ascending order; vice versa
 
 class Collections
 	this class consists exclusively of static methods that operate or return collections.
