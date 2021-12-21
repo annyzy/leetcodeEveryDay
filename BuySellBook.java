@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class BuySellBook {
-    public void buysell( int[] buyOffers, int[] sellOffers, int buyPrice, int sellPrice){
+    public static void buysell( int[] buyOffers, int[] sellOffers, int buyPrice, int sellPrice){
         //max heap to store the buy offers
         PriorityQueue<Integer> buy = new PriorityQueue<Integer>( (a,b) -> b-a );
         //min heap to store the sell offers
@@ -31,12 +31,11 @@ public class BuySellBook {
     }
 
     public static void main(String[] args){
-        BuySellBook offer = new BuySellBook();
         int[] buyOffers = new int[]{100, 100, 99, 99, 97, 90};
         int[] sellOffers = new int[]{109, 110, 110, 114, 115, 119};
 
         System.out.println("Buy offers are " + Arrays.toString(buyOffers));
         System.out.println("Sell offers are " + Arrays.toString(sellOffers));
-        offer.buysell(buyOffers, sellOffers, 200, 150);
+        buysell(buyOffers, sellOffers, 200, 150);
     }
 }
