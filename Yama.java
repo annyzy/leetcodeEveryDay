@@ -37,7 +37,7 @@ class Yama {
                 curr = levels[i];
             }
         }
-        System.out.println(count);
+        // System.out.println(count);
         return count;
     }
 
@@ -64,12 +64,43 @@ class Yama {
     }
 
     public static int kOddElements(int[] numbers, int k) {
-        return 0;
+        // edge case
+        if (k == 0)
+            return 0;
+
+        int len = numbers.length;
+        boolean[] isOdd = new boolean[len];
+        for (int i = 0; i < len; i++) {
+            isOdd[i] = numbers[i] % 2 != 0;
+        }
+
+        HashSet<String> ans = new HashSet<String>();
+
+        for (int i = 0; i < len; i++) {
+            StringBuilder sb = new StringBuilder();
+            int oddCount = 0;
+            for (int j = i; j < len; j++) {
+                if (isOdd[j]) {
+                    oddCount++;
+                    if (oddCount > k)
+                        break;
+                }
+                sb.append(numbers[j]);
+                ans.add(sb.toString());
+            }
+        }
+
+        // System.out.println(ans.size());
+        return ans.size();
     }
 
     public static void main(String[] args) {
+
         int[] lists = { 3, 2, 1, 4, 7 };
         int maxSpread = 2;
         groupDivision(lists, maxSpread);
+
+        int[] lists1 = { 3, 2, 3, 2 };
+        kOddElements(lists1, 1);
     }
 }
