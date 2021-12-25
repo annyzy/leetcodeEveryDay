@@ -41,8 +41,34 @@ class Yama {
         return count;
     }
 
+    public int[][] merge(int[][] intervals) {
+
+        // edge case
+        if (intervals.length == 0)
+            return new int[0][2];
+
+        // sort in ascending order
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+
+        LinkedList<int[]> ans = new LinkedList<>();
+
+        for (int[] interval : intervals) {
+            if (ans.isEmpty() || ans.getLast()[1] < interval[0]) {
+                ans.add(interval);
+            } else {
+                ans.getLast()[1] = Math.max(interval[1], ans.getLast()[1]);
+            }
+        }
+
+        return ans.toArray(new int[ans.size()][]);
+    }
+
+    public static int kOddElements(int[] numbers, int k) {
+        return 0;
+    }
+
     public static void main(String[] args) {
-        int[] lists = { 1, 4, 7, 3, 4 };
+        int[] lists = { 3, 2, 1, 4, 7 };
         int maxSpread = 2;
         groupDivision(lists, maxSpread);
     }
