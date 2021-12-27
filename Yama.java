@@ -265,6 +265,25 @@ class Yama {
         return ans;
     }
 
+    public int firstUniqChar(String s) {
+        int len = s.length();
+        //edge case
+        if(len == 0) return -1;
+        
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        char[] ch = s.toCharArray();
+        
+        for(char c: ch){
+            map.put(c, map.getOrDefault(c,0) + 1)   ; 
+        }
+        
+        for(int i  = 0; i < len; i++){
+            if(map.get(s.charAt(i)) == 1) return i;
+        }
+        
+        return -1;
+    }
+
     public static void main(String[] args) {
         String a = "ababa";
         String b = "aaabaab";
