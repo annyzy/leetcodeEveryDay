@@ -239,6 +239,32 @@ class Yama {
         return total + n;
     }
 
+    public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
+        int len = arr.length;
+        
+        //edge case
+        if(arr == null || len == 0) return -1;
+        
+        int[] list = new int[len+1];
+        for (int a: arr){
+            if(a>len){
+                ++list[len];
+            }else{
+                ++list[a];
+            }
+        }
+        
+        int ans = 0;
+        for(int i  = 1; i <= len; i++){
+            if(ans + list[i] < i){
+                ans = ans+list[i];
+            }else{
+                ans = i;
+            }
+        }
+        return ans;
+    }
+
     public static void main(String[] args) {
         String a = "ababa";
         String b = "aaabaab";
