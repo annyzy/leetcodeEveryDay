@@ -189,17 +189,19 @@ class Yama {
 
         return ans;
     }
+
     public static List<Integer> commonPrefix2(List<String> inputs) {
-    //edge case
-    if(inputs.size() == 0) return null;
-    List<Integer> ans = new ArrayList<>();
+        // edge case
+        if (inputs.size() == 0)
+            return null;
+        List<Integer> ans = new ArrayList<>();
 
-    for(int i = 0; i < inputs.size(); i++){
-    ans.add(sumSimilarities(inputs.get(i)));
-    // System.out.println(ans.get(i));
-    }
+        for (int i = 0; i < inputs.size(); i++) {
+            ans.add(sumSimilarities(inputs.get(i)));
+            // System.out.println(ans.get(i));
+        }
 
-    return ans;
+        return ans;
     }
 
     // Function to return the similarity sum
@@ -241,24 +243,25 @@ class Yama {
 
     public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
         int len = arr.length;
-        
-        //edge case
-        if(arr == null || len == 0) return -1;
-        
-        int[] list = new int[len+1];
-        for (int a: arr){
-            if(a>len){
+
+        // edge case
+        if (arr == null || len == 0)
+            return -1;
+
+        int[] list = new int[len + 1];
+        for (int a : arr) {
+            if (a > len) {
                 ++list[len];
-            }else{
+            } else {
                 ++list[a];
             }
         }
-        
+
         int ans = 0;
-        for(int i  = 1; i <= len; i++){
-            if(ans + list[i] < i){
-                ans = ans+list[i];
-            }else{
+        for (int i = 1; i <= len; i++) {
+            if (ans + list[i] < i) {
+                ans = ans + list[i];
+            } else {
                 ans = i;
             }
         }
@@ -267,24 +270,96 @@ class Yama {
 
     public int firstUniqChar(String s) {
         int len = s.length();
-        //edge case
-        if(len == 0) return -1;
-        
+        // edge case
+        if (len == 0)
+            return -1;
+
         HashMap<Character, Integer> map = new HashMap<Character, Integer>();
         char[] ch = s.toCharArray();
-        
-        for(char c: ch){
-            map.put(c, map.getOrDefault(c,0) + 1)   ; 
+
+        for (char c : ch) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
         }
-        
-        for(int i  = 0; i < len; i++){
-            if(map.get(s.charAt(i)) == 1) return i;
+
+        for (int i = 0; i < len; i++) {
+            if (map.get(s.charAt(i)) == 1)
+                return i;
         }
-        
+
         return -1;
     }
 
+    public static boolean checkValidString(String s) {
+        int n = s.length();
+        boolean[][] dp = new boolean[n][n];
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) == '?') {
+                dp[i][i] = true;
+            }
+        }
+        for (int i = 1; i < n; i++) {
+            char c1 = s.charAt(i - 1), c2 = s.charAt(i);
+            dp[i - 1][i] = (c1 == '(' || c1 == '?' || c1==')' || c1=='[' || c1 == ']') && (  (c2 == ')' && c1 != ')' && c1 !='[' && c1 !=']') || c2 == '?' || (c2 == '(' && c1 != '(' && c1 !='[' && c1 !=']') ||(c2 == '[' && c1 != '[' && c1 !='(' && c1 !=')') || (c2 == ']' && c1 != ']' && c1 !='(' && c1 !='('));
+        }
+        for (int i = n - 3; i >= 0; i--) {
+            char c1 = s.charAt(i);
+            for (int j = i + 2; j < n; j++) {
+                char c2 = s.charAt(j);
+                if ((c1 == '(' || c1 == '?' || c1==')' || c1=='[' || c1 == ']') && (  (c2 == ')' && c1 != ')' && c1 !='[' && c1 !=']') || c2 == '?' || (c2 == '(' && c1 != '(' && c1 !='[' && c1 !=']') ||(c2 == '[' && c1 != '[' && c1 !='(' && c1 !=')') || (c2 == ']' && c1 != ']' && c1 !='(' && c1 !='('))) {
+                    dp[i][j] = dp[i + 1][j - 1];
+                }
+                for (int k = i; k < j && !dp[i][j]; k++) {
+                    dp[i][j] = dp[i][k] && dp[k + 1][j];
+                }
+            }
+        }
+        return dp[0][n - 1];
+    }
+
+
+     public static int validCut(String s){
+        //edge case
+        if(s.length() == 0) return 0;
+
+        int len = s.length();
+        int count = 0;
+        for(int i  = 1; i < len; i++){
+            String a = s.substring(0, i);
+            // System.out.println("first half");
+            // System.out.println(a);
+
+            String b = s.substring(i);
+            // System.out.println("second half");
+            // System.out.println(b);
+
+            boolean aCheck = checkValidString(a);
+            boolean bCheck = checkValidString(b);
+            if(aCheck == true &&  bCheck == true) {
+                // System.out.println("true first half");
+                // System.out.println(a);
+                // System.out.println("true second half");
+                // System.out.println(b);
+                ++count;
+            }
+        }
+        return count;
+     }
+
     public static void main(String[] args) {
+        String s1= "[(?";
+        String s2 = "[(?]";
+        String s3 = "[(?][?][";
+        String s4 = "(][)";
+        String s5 = "(?)(";
+        String s6 = "[(?][?][";
+        //(?)?, )(?)   
+        String s7 = "()(";
+        System.out.println(validCut(s6));
+        // System.out.println(isValid(s4));
+        // System.out.println(checkValidString(s1));
+        // System.out.println(checkValidString(s2));
+        // System.out.println(checkValidString(s5));
+        // System.out.println(checkValidString(s3));        
         String a = "ababa";
         String b = "aaabaab";
         String[] s = { "ababa", "aaabaab" };
