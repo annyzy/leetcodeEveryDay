@@ -299,13 +299,21 @@ class Yama {
         }
         for (int i = 1; i < n; i++) {
             char c1 = s.charAt(i - 1), c2 = s.charAt(i);
-            dp[i - 1][i] = (c1 == '(' || c1 == '?' || c1==')' || c1=='[' || c1 == ']') && (  (c2 == ')' && c1 != ')' && c1 !='[' && c1 !=']') || c2 == '?' || (c2 == '(' && c1 != '(' && c1 !='[' && c1 !=']') ||(c2 == '[' && c1 != '[' && c1 !='(' && c1 !=')') || (c2 == ']' && c1 != ']' && c1 !='(' && c1 !='('));
+            dp[i - 1][i] = (c1 == '(' || c1 == '?' || c1 == ')' || c1 == '[' || c1 == ']')
+                    && ((c2 == ')' && c1 != ')' && c1 != '[' && c1 != ']') || c2 == '?'
+                            || (c2 == '(' && c1 != '(' && c1 != '[' && c1 != ']')
+                            || (c2 == '[' && c1 != '[' && c1 != '(' && c1 != ')')
+                            || (c2 == ']' && c1 != ']' && c1 != '(' && c1 != '('));
         }
         for (int i = n - 3; i >= 0; i--) {
             char c1 = s.charAt(i);
             for (int j = i + 2; j < n; j++) {
                 char c2 = s.charAt(j);
-                if ((c1 == '(' || c1 == '?' || c1==')' || c1=='[' || c1 == ']') && (  (c2 == ')' && c1 != ')' && c1 !='[' && c1 !=']') || c2 == '?' || (c2 == '(' && c1 != '(' && c1 !='[' && c1 !=']') ||(c2 == '[' && c1 != '[' && c1 !='(' && c1 !=')') || (c2 == ']' && c1 != ']' && c1 !='(' && c1 !='('))) {
+                if ((c1 == '(' || c1 == '?' || c1 == ')' || c1 == '[' || c1 == ']')
+                        && ((c2 == ')' && c1 != ')' && c1 != '[' && c1 != ']') || c2 == '?'
+                                || (c2 == '(' && c1 != '(' && c1 != '[' && c1 != ']')
+                                || (c2 == '[' && c1 != '[' && c1 != '(' && c1 != ')')
+                                || (c2 == ']' && c1 != ']' && c1 != '(' && c1 != '('))) {
                     dp[i][j] = dp[i + 1][j - 1];
                 }
                 for (int k = i; k < j && !dp[i][j]; k++) {
@@ -316,14 +324,14 @@ class Yama {
         return dp[0][n - 1];
     }
 
-
-     public static int validCut(String s){
-        //edge case
-        if(s.length() == 0) return 0;
+    public static int validCut(String s) {
+        // edge case
+        if (s.length() == 0)
+            return 0;
 
         int len = s.length();
         int count = 0;
-        for(int i  = 1; i < len; i++){
+        for (int i = 1; i < len; i++) {
             String a = s.substring(0, i);
             // System.out.println("first half");
             // System.out.println(a);
@@ -334,7 +342,7 @@ class Yama {
 
             boolean aCheck = checkValidString(a);
             boolean bCheck = checkValidString(b);
-            if(aCheck == true &&  bCheck == true) {
+            if (aCheck == true && bCheck == true) {
                 // System.out.println("true first half");
                 // System.out.println(a);
                 // System.out.println("true second half");
@@ -343,23 +351,23 @@ class Yama {
             }
         }
         return count;
-     }
+    }
 
     public static void main(String[] args) {
-        String s1= "[(?";
+        String s1 = "[(?";
         String s2 = "[(?]";
         String s3 = "[(?][?][";
         String s4 = "(][)";
         String s5 = "(?)(";
         String s6 = "[(?][?][";
-        //(?)?, )(?)   
+        // (?)?, )(?)
         String s7 = "()(";
         System.out.println(validCut(s6));
         // System.out.println(isValid(s4));
         // System.out.println(checkValidString(s1));
         // System.out.println(checkValidString(s2));
         // System.out.println(checkValidString(s5));
-        // System.out.println(checkValidString(s3));        
+        // System.out.println(checkValidString(s3));
         String a = "ababa";
         String b = "aaabaab";
         String[] s = { "ababa", "aaabaab" };
